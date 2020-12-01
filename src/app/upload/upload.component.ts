@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { UploadService } from '../services/upload.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-upload',
@@ -14,6 +15,7 @@ export class UploadComponent implements OnInit {
 
   constructor(
     private uploadService: UploadService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -61,6 +63,6 @@ export class UploadComponent implements OnInit {
   }
 
   selectFile(file){
-    debugger;
+    this.router.navigate(['author', file])
   }
 }

@@ -1,0 +1,37 @@
+<div class="author row">
+  <div class="col-2 list">
+    <ul class="">
+      <li class="" (click)="setActiveIndex(i)" *ngFor="let scene of localJSON; let i=index">
+        {{scene?.ID}}
+      </li>
+    </ul>
+
+    <div class="card-contianer p-0 col-sm-12" *ngIf="changesDetected()">
+      <div class="sync-card card m-2">
+        <div class="card-body">
+          Changes detected that have not been synced yet.
+          <button class="btn btn-sm btn-success" (click)="syncData()">
+            Sync data
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-5 editor" *ngIf="activeIndex != -1">
+    <div class="">
+      <div class="">
+        <textarea style="background-color:#999;color:white;width:100%" [(ngModel)]='editableJsonString'></textarea>
+      </div>
+      <div class="" *ngIf="invalidJson">
+        INVALID JSON. Please use Jsonlint.com to verify the Json.
+      </div>
+    </div>
+
+    <button class="btn btn-sm btn-success mr-2" (click)="saveData()">
+      <span class="fa fa-check">Save</span>
+    </button>
+  </div>
+  <div class="col-5 preview">
+    Preview Component for each page type or common---- will decide later
+  </div>
+</div>
