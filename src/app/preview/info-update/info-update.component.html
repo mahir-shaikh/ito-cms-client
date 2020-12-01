@@ -1,0 +1,33 @@
+<!-- <div class="table-container" *ngIf="tableData">
+    <div class="flex-container row">
+
+        <div *ngFor="let header of tableData.headerData" class="header header-data col">
+            {{ header }}
+        </div>
+
+    </div>
+    <div class="flex-container row">
+
+        <div *ngFor="let row of tableData.rowData" class="row-data col">
+            {{ row }}
+        </div>
+
+    </div>
+</div> -->
+<div class="table-container" *ngIf="tableData">
+    <table class="data-table">
+        <tr>
+            <th *ngFor="let header of tableData.headerData" class="header-data">
+                {{ header }}
+            </th>
+        </tr>
+        <tr>
+            <td *ngFor="let row of tableData.rowData" class="row-data">
+                {{ row }}
+            </td>
+        </tr>
+    </table>
+</div>
+
+<app-feedback-generic [scene]="data"></app-feedback-generic>
+<app-citations [scene]="data"></app-citations>

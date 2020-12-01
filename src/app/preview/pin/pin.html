@@ -1,0 +1,33 @@
+<div class="modal-dialog modal-lg modal-rtb animated pin-modal {{sceneData.ID}}" role="dialog" *ngIf="!loading">
+    <div class="pin-modal_content fadeUp60" tabindex="0" id="PinModal">
+        <div class="pin-modal_content--data">
+            <app-fixed-header-template [header]="sceneData" *ngIf="pinType != 'SingleSelect'"></app-fixed-header-template>
+            <ng-container [ngSwitch]="pinType">
+                <div class="pin-readUpdate" *ngSwitchCase="'ReadUpdate'">
+                    <app-info-update [data]="sceneData"></app-info-update>
+                </div>
+                <div class="pin-dragDrop" *ngSwitchCase="2">
+                    <app-dragdrop [data]="sceneData"></app-dragdrop>
+                </div>
+                <div class="pin-coulmnMultiSelect" *ngSwitchCase="3">
+                    <app-column-multi-select [data]="sceneData"></app-column-multi-select>
+                </div>
+                <div class="pin-singleSelectRadio" *ngSwitchCase="'SingleSelect'">
+                    <app-single-select-radio [data]="sceneData"></app-single-select-radio>
+                </div>
+                <div class="pin-multiSelectAccordion" *ngSwitchCase="'MultiSelect'">
+                    <app-multiselect-accordion [data]="sceneData"></app-multiselect-accordion>
+                </div>
+                <div class="pin-columnMultiDrag" *ngSwitchCase="6">
+                    <app-column-multi-drag [data]="sceneData"></app-column-multi-drag>
+                </div>
+                <div class="pin-itextCount" *ngSwitchCase="10">
+                    <app-itext-count [data]="sceneData"></app-itext-count>
+                </div>
+                <div class="pin-matrix" *ngSwitchCase="11">
+                    <app-matrix [data]="sceneData"></app-matrix>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<span id="assistive" class="assistive-text" aria-live="polite">
+    {{ assistiveText }}
+</span>
+<div class="single-select-radio">
+    <div class="email-header">
+        <div class="email-avatar">
+            <div class="email-avatar_shadow">
+                <i class="ms-icons" aria-hidden="true"></i>
+            </div>
+        </div>
+        <div class="email-info">
+            <h1 class="email-from" [innerHtml]="data.header1" *ngIf="data.header1"></h1>
+            <h2 class="email-direction" [innerHtml]="data.header2" *ngIf="data.header2"></h2>
+            <h2 class="email-direction" [innerHtml]="data.name"
+                *ngIf="data.header2 == null || data.header2 == undefined"></h2>
+        </div>
+    </div>
+    <div class="radio-container">
+        <div class="radio-exercise-wrapper">
+            <div>
+                <label class="radio-narrative" [innerHtml]="data.narrative"></label>
+            </div>
+            <p class="radio-question" [innerHtml]="data.osd"></p>
+
+            <!-- Puting this here for correct Tab Index -->
+            <!-- <app-hint-modal [pinID]="pinID" [hideHint]="isDisabled"></app-hint-modal> -->
+            
+            <div class="radio-item" [ngClass]="{ 'radio-itemSelected': column.isChecked }"
+                *ngFor="let column of data.items; let colIndex = index">
+                <input type="radio" name="radio-select" attr.value="{{column.text}}" attr.id="col-{{colIndex}}-column"
+                    [checked]="column.isChecked" 
+                    tabindex="-1" (change)="selectOption(colIndex)" [attr.aria-checked]="column.isChecked">
+                <label for="col-{{colIndex}}-column" [tabindex]="0"
+                    (keydown)="selectOption(colIndex, $event)" (click)="selectOption(colIndex)"
+                    attr.aria-label="{{column.isChecked ? 'selected': 'not selected'}}, {{column.text}}, radio button"
+                     [attr.aria-checked]="column.isChecked"
+                    >
+                    <span id="radioText{{colIndex}}" class="radio-text" [innerHTML]="column.text"></span>
+                </label>
+            </div>
+        </div>
+
+    </div>
+    
+</div>
+<div class="feedback-container animated fadeIn" role="alert" >
+    <!-- <reviewpage [pinID]="pinID"></reviewpage> -->
+</div>

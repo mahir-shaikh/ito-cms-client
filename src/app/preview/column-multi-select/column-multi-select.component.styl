@@ -1,0 +1,245 @@
+// @import '../../../../assets/css/config'
+
+.column-multiSelect-wrapper
+    display: flex
+    width: 100% 
+    flex-wrap: wrap
+    flex-direction: column
+    .column-multiSelect
+        padding 0 32px 16px 0
+        // width 33%
+        flex 1
+        @media only screen and (max-width 1280px)
+            width 100%
+        &:last-child
+            padding-right 0
+        h2
+            font-size: 1.25em
+            font-weight: 700
+            text-align: left
+            padding-bottom 1em
+        ul
+            padding: 0
+            list-style: none
+            word-break break-word
+        .column-information
+            font-weight 600
+            padding-bottom 1.25em
+            margin-bottom 1.25em
+            border-bottom 1px solid $gray10
+            display block
+            color $gray70
+            text-align left
+        &-container
+            display flex
+            align-items baseline
+            &:nth-child(2)
+                align-items flex-start
+        &--header
+            padding-bottom 0px
+            display flex
+            flex-direction column
+            h2
+                flex 1 55px
+
+.muliti-result
+    padding: 0 15px 30px 15px
+    max-width 750px
+    h3
+        color: $accent01
+        font-weight: 300
+    h4
+        color: $primary
+        font-weight: 700
+    ul
+        padding: 0
+        list-style: none
+        max-width 100%
+        margin 0
+    p
+        max-width 100%
+        margin 0
+    .options-selected
+        margin-top 32px
+    .options-wrapper
+        margin-bottom 32px
+        p
+            font-size 1.125em
+            color $accent01
+            font-weight 700
+            margin-bottom 1em
+        li
+            display flex
+            margin-bottom 10px
+            p
+                font-size 1.125em
+                color $gray100
+                margin-right 25px
+                font-weight 300
+            .badge
+                font-weight 600
+                padding 8px 16px
+                border-radius 8px
+                line-height 1em
+                font-size 1.125em
+                margin-left: auto
+            .badge.success
+                background $successColor
+            .badge.danger
+                background $dangerColor
+
+label.custom-label
+    &:focus
+        outline 4px dashed $primary
+        span
+            color $primary
+        span:before
+            color $primary
+    &:hover
+        border-color $gray100
+        span
+            color $gray100
+
+label.custom-labelChecked
+    // background $primary
+    color $white
+    &.focus, &:focus, &:hover
+        outline 3px dashed $primary
+        span
+            color $white
+        span:before
+            color $white
+
+label.custom-labelDisabled
+    // background $gray10
+    @media screen and (-ms-high-contrast: black-on-white)
+        border none
+    @media screen and (-ms-high-contrast: white-on-black) 
+        border none
+    &.focus, &:focus, &:hover
+        outline none
+        border-color $gray10
+        span
+            color $gray70
+            cursor default
+        span:before
+            color $gray50
+
+
+.card
+    border 1px solid $gray30
+    border-radius 5px
+    color $gray70
+    padding 0.5em
+    &:not(:last-child)
+        margin-bottom 10px
+    &:focus
+        color $primary
+        outline none
+        border-color $primary
+        .custom-label
+            span:before
+                color $primary
+        @media screen and (-ms-high-contrast: black-on-white) 
+            outline solid 6px black
+        @media screen and (-ms-high-contrast: white-on-black) 
+            outline solid 6px white
+    &:hover
+        outline none
+        border-color $gray100
+        background $gray05
+        color $gray100
+        .col-layout
+            outline 3px solid transparent
+    .col-layout
+        flex 1
+        padding 1em 1em
+        outline none
+        border none
+        border-radius 5px
+        margin 0
+        width 100%
+        &.focus, &:focus , &:hover          
+            outline 3px dashed $primary
+            color $primary
+            .custom-label
+                span:before
+                    color $primary
+.card.card-disabled
+    background $gray10
+    @media screen and (-ms-high-contrast: black-on-white) 
+        border none
+    @media screen and (-ms-high-contrast: white-on-black) 
+        border none
+    &.focus, &:focus, &:hover
+        outline none
+        border-color $gray10
+        color $gray50
+        @media screen and (-ms-high-contrast: black-on-white) 
+            border none
+        @media screen and (-ms-high-contrast: white-on-black) 
+            border none
+        .custom-label
+            span
+                cursor default
+            span:before
+                color inherit
+    .custom-label
+        span:before
+            @media screen and (-ms-high-contrast: black-on-white) 
+                display none
+            @media screen and (-ms-high-contrast: white-on-black) 
+                display none
+    .col-layout
+        border none
+        &.focus, &:focus, &:hover
+            color $gray50
+            outline none
+            .custom-label
+                span
+                    cursor default
+                span:before
+                    color inherit
+
+.card.card-checked
+    background $primary
+    color $white
+    // &:hover
+    //     background darken($primary,15)
+    &:focus
+        .custom-label
+            span:before
+                color $white
+        &:hover
+            @media screen and (-ms-high-contrast: active)
+                outline 3px solid transparent
+            .custom-label
+                span
+                    color $white
+                    &:before
+                        color $white
+    .col-layout
+        &.focus, &:focus, &:hover
+            outline 3px dashed $white
+            color $white
+            .custom-label
+                span:before
+                    color $white
+        &:hover
+            @media screen and (-ms-high-contrast: active)
+                outline 3px solid transparent
+            .custom-label
+                span
+                    color $white
+                    &:before
+                        color $white
+
+.card.card-border
+    outline none
+    border-color $primary
+
+.custom-label
+    label
+        font-size 1em
+    input + label:before
+        font-size 1.25em

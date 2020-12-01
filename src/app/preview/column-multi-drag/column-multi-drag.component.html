@@ -1,0 +1,12 @@
+<div class="column-multi-drag" *ngIf="data">
+    <div class="container">
+        <div class="multi-drag-tab">
+            <div class="multi-drag-col" *ngFor="let list of data.columns; let colIndex = index">
+                <h2 class="multi-drag-tab-header">{{list.name}}</h2>
+                <app-dragdrop [goals]="list.items" [pinIndex]="colIndex" [showSubmit]="false" noteText="" #dragdrop></app-dragdrop>
+            </div>
+        </div>
+        <app-feedback-generic [scene]="data"></app-feedback-generic>
+        <app-citations [scene]="data"></app-citations>
+    </div>
+</div>

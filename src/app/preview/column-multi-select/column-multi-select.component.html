@@ -1,0 +1,61 @@
+<!-- <p [innerHTML]="data.narrative"></p> -->
+<span id="assistive" class="assistive-text" aria-live="polite" aria-relevant="additions text">
+    {{ assistiveText }}
+</span>
+<div *ngIf="data">
+    <section class="column-multiSelect-wrapper">
+        <div class="column-multiSelect-container">
+            <div class="column-multiSelect column-multiSelect--header"
+                *ngFor="let column of data.columns; let colIndex = index">
+                <h2>{{column.name}}</h2>
+                <span class="column-information" *ngIf="column.header" [innerHTML]="column.header">
+                    <!-- <isma-text-output [key]="processHeaderData(column.header, 1)" [sceneId]="processHeaderData(column.header, 2)" *ngIf="processHeaderData(column.header,1) != null"></isma-text-output> -->
+                    <!-- {{column.header}} -->
+                </span>
+            </div>
+        </div>
+        <div class="column-multiSelect-container">
+            <div class="column-multiSelect" *ngFor="let column of data.columns; let colIndex = index">
+                <ul role="list">
+                    <li class="card" *ngFor="let item of column.items; let i = index"
+                        [ngClass]="{ 'card-checked': item.isChecked, 'card-disabled': (isSelectionDisabled && !item.isChecked && !checkConditionInEachList) || (checkConditionInEachList && !item.isChecked && selectionDisabledArray[colIndex]), 'card-border' : item.checkboxHasFocus}">
+                        <label class="col-layout"
+                            [ngClass]="{ 'custom-labelChecked': item.isChecked, 'custom-labelDisabled': (isSelectionDisabled && !item.isChecked && !checkConditionInEachList) || (checkConditionInEachList && !item.isChecked && selectionDisabledArray[colIndex]) }"
+                            [tabindex]="(isSelectionDisabled && !item.isChecked && !checkConditionInEachList) || (checkConditionInEachList && !item.isChecked && selectionDisabledArray[colIndex]) ? -1 : 0"
+                            (keydown)="makeSelection(colIndex, i, $event)"
+                            (focus)="focusGained(item);item.checkboxHasFocus = true;"
+                            (blur)="item.checkboxHasFocus = false" role="checkbox">
+                            <div class="custom-label">
+                                <input type="checkbox" attr.value="{{item.text}}" attr.id="col-{{colIndex}}-{{i}}"
+                                    [checked]="item.isChecked" (change)="makeSelection(colIndex, i, null)"
+                                    [disabled]="(isSelectionDisabled && !item.isChecked && !checkConditionInEachList) || (checkConditionInEachList && !item.isChecked && selectionDisabledArray[colIndex])"
+                                    tabindex="-1">
+                                <label attr.for="col-{{colIndex}}-{{i}}" [attr.aria-checked]="item.isChecked"
+                                    attr.aria-label="item.text" [innerHTML]="item.text">
+                                    <!-- {{item.text}} -->
+                                </label>
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+
+                <p class="max-option-selected" aria-live="polite" aria-relevant="additions text"
+                    [ngClass]="{ 'max-selected': selections[colIndex].length == data.maximum }"
+                    *ngIf="checkConditionInEachList">
+                    {{selections[colIndex].length}} of {{data.maximum}} options selected
+                    <span class="sr-only"> for {{column.name}}</span>
+                </p>
+
+            </div>
+        </div>
+    </section>
+    <section class="pin-modal__footer actions-wrapper">
+        <p class="max-option-selected" aria-live="polite" aria-relevant="additions text"
+            [ngClass]="{ 'max-selected': selected.length == data.maximum }" *ngIf="!checkConditionInEachList">
+            {{selected.length}} of {{data.maximum}} selected
+        </p>
+    </section>
+
+    <app-feedback-generic [scene]="data"></app-feedback-generic>
+    <app-citations [scene]="data"></app-citations>
+</div>

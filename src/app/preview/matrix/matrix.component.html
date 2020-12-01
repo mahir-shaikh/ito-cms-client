@@ -1,0 +1,44 @@
+<span id="assistive" class="assistive-text" aria-live="polite" aria-relevant="additions text">
+	{{ assistiveText }}
+</span>
+
+<div class="exercise-wrapper">
+	<table class="matrix-decision" *ngIf="data">
+		<tr class="header">
+			<td [innerHTML]="data?.header">
+				<!-- {{data?.header}} -->
+			</td>
+			<td id="option{{optIndex+1}}" *ngFor="let option of data.options; let optIndex = index"
+				[innerHTML]="option.text">
+				<!-- {{option.text}} -->
+			</td>
+		</tr>
+		<tr *ngFor="let item of data.items; let i = index;" role="region" attr.aria-labelledby="itemName{{i}}"
+			[tabindex]="0">
+			<td class="title-field" id="label{{i}}">
+				<div id="itemName{{i}}" [innerHtml]="item.text"></div>
+			</td>
+			<td *ngFor="let option of data.options; let j = index;" #radio>
+				<input [class.checked]="item.selectionIndex == (j+1)" type="radio" id="sel_{{i}}_{{j}}"
+					name="sel_{{i}}_{{j}}" attr.value="{{option.text}}-Left" [checked]="item.selectionIndex == (j+1)"
+					(change)="makeSelection(i, j+1, null)" [attr.aria-checked]="item.selectionIndex == (j+1)"
+					tabindex="-1" attr.aria-labelledby="option{{j+1}}">
+				<label for="sel_{{i}}_{{j}}" [ngClass]="{ 'focused': radio.hasFocus }"
+					[tabindex]="0" (focus)="focusGained(item, true); radio.hasFocus = true;"
+					(blur)="radio.hasFocus = false" (mouseenter)="radio.hasFocus = true"
+					(mouseleave)="radio.hasFocus = false" (keydown)="makeSelection(i, j+1, $event);"
+					(click)="makeSelection(i, j+1, null)" role="region"
+					[attr.aria-checked]="item.selectionIndex == (j+1)" attr.aria-labelledby="option{{j+1}}"
+					>
+				</label>
+			</td>
+		</tr>
+	</table>
+</div>
+
+<div class="feedback-wrapper">
+	<app-feedback-generic [scene]="data"></app-feedback-generic>
+	<app-citations [scene]="data"></app-citations>
+</div>
+
+<!-- {{ccData|json}} -->

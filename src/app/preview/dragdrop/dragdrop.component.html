@@ -1,0 +1,45 @@
+<div class="goal-container col-{{pinIndex}}">
+    <div class="assistive-text" *ngIf="noteText != ''">
+        {{ noteText }}
+    </div>
+    <span id="assistive-{{pinIndex}}" class="assistive-text" aria-live="polite" aria-relevant="additions text">
+        {{ assertiveText }}
+    </span>
+    <div class="goal-list__note" [innerHtml]="noteText">
+    </div>
+    <div class="wrapper">
+        <ul class="match-list" role="listbox" *ngIf="matchList.length > 0">
+            <li class="match match-{{pinIndex}} fixedHeight" role="option"
+                *ngFor="let item of matchList; let i = index;">
+                <div class="match-details">
+                    <div class="match-index">{{ i + 1 }}</div>
+                    <div class="match-text" [innerHtml]="item.text"></div>
+                    <!-- <div class="match-icon">
+                        <i class="icon-up-down-arrows"></i>
+                    </div> -->
+                </div>
+            </li>
+        </ul>
+        <ul class="goal-list {{matchList.length > 0 ? 'flex-basis-30': ''}}" role="listbox" cdkDropList (cdkDropListDropped)="drop($event)"
+            aria-label="Drag and drop list">
+            <li class="goal goal-{{pinIndex}} {{matchList.length > 0 ? 'fixedHeight': ''}}" role="option"
+                draggable="true" [tabindex]="goal?.tabindex"
+                [ngClass]="{ 'goal-selected': goal?.isSelected }" *ngFor="let goal of goals; let i = index;"
+                (keydown)="handleKeyboardEvent($event, i);" [attr.aria-selected]="goal?.isSelected ? true : false"
+                (focus)="focusGained(goal, i)" cdkDrag>
+                <div class="goal-details">
+                    <div class="goal-index">{{ i + 1 }}</div>
+                    <div class="goal-text">
+                        <span [innerHtml]="goal?.text"></span>
+                    </div>
+                    <div class="goal-icon">
+                        <i class="icon-up-down-arrows"></i>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <app-feedback-generic [scene]="data"></app-feedback-generic>
+    <app-citations [scene]="data"></app-citations>
+</div>

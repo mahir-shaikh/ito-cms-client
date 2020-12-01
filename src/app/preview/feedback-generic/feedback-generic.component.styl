@@ -1,0 +1,29 @@
+// @import '../../../../assets/css/config'
+
+.feedback
+    &-data
+        color $accent01
+            h4 
+                font-size 1.5em
+    &-heading
+        font-size 1.2em
+        font-weight 600
+
+::ng-deep 
+    .main-div,.main-div-one
+        display table
+        .ms-Icon
+            &--CheckMark
+                display table-cell
+                vertical-align middle
+                padding-right 0.5em
+                &::before
+                    font-family FabricMDL2Icons !important
+                    color #107C10
+            &--CalculatorMultiply
+                display table-cell
+                vertical-align middle
+                padding-right 0.5em
+                &::before
+                    font-family FabricMDL2Icons !important
+                    color #D83B01

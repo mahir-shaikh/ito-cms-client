@@ -1,0 +1,353 @@
+// @import '../../../../assets/css/config'
+
+.accContainer
+    padding-bottom 1em
+    @media only screen and (max-width 1280px)
+        padding 1em
+    h2 
+        font-size 21px
+    .accordion
+        &-heading
+            margin-top 1.5em
+            margin-bottom 1em
+            color $accent01
+            font-weight 600
+        &-list
+            list-style none
+            max-width 100%
+            padding 0
+        &:first-child
+            .accordion-heading
+                margin-top 0
+
+.card.card-border
+    outline none
+    border-color $primary
+.card
+    border 1px solid $gray30
+    border-radius 5px
+    color $gray70
+    padding 1em 0
+    &:not(:last-child)
+        margin-bottom 10px
+    &:focus
+        color $primary
+        outline none
+        border-color $primary
+        .custom-label
+            span:before
+                color $primary
+        @media screen and (-ms-high-contrast: black-on-white) 
+            outline solid 6px black
+        @media screen and (-ms-high-contrast: white-on-black) 
+            outline solid 6px white
+    &:hover
+        outline none
+        border-color $gray100
+        background $gray05
+        color $gray100
+        .arrow-icon
+            outline 3px solid transparent
+        .col-layout
+            outline 3px solid transparent           
+    &-header
+        display flex
+        padding 0 1em
+    .arrow-icon
+        display flex
+        align-items center
+        padding 1em 1em
+        outline none
+        border none
+        border-radius 5px
+        &.focus, &:focus            
+            outline 3px dashed $primary
+            color $primary
+        &:hover       
+            outline 3px solid transparent
+            color $gray100
+        i
+            font-size 1.25em
+    .col-layout
+        flex 1
+        padding 1em 1em
+        outline none
+        border none
+        border-radius 5px
+        margin 0
+        &.focus, &:focus            
+            outline 3px dashed $primary
+            color $primary
+            .custom-label
+                span:before
+                    color $primary
+        // &:hover
+        //     outline 3px solid transparent
+        //     color $gray100
+        //     .custom-label
+        //         span:before
+        //             color $gray100
+    &-body
+        padding 0 2em 1em 7.25em
+
+.card.card-checked
+    background $primary !important
+    color $white
+    // &:hover
+    //     background darken($primary,15)
+    &:focus
+        .custom-label
+            span:before
+                color $white
+    .col-layout
+        &.focus, &:focus
+            outline 3px dashed $white
+            color $white
+            .custom-label
+                span:before
+                    color $white
+        &:hover
+            @media screen and (-ms-high-contrast: active)
+                outline 3px solid transparent
+            .custom-label
+                span
+                    color $white
+                    &:before
+                        color $white
+    .arrow-icon
+        &.focus, &:focus            
+            outline 3px dashed $white
+            color $white
+        &:hover
+            color $white
+            background rgba(0,0,0,.2)
+
+.card.card-disabled
+    background $gray10
+    @media screen and (-ms-high-contrast: black-on-white) 
+        border none
+    @media screen and (-ms-high-contrast: white-on-black) 
+        border none
+    &.focus, &:focus, &:hover
+        outline none
+        border-color $gray10
+        color $gray50
+        @media screen and (-ms-high-contrast: black-on-white) 
+            border none
+        @media screen and (-ms-high-contrast: white-on-black) 
+            border none
+        .custom-label
+            span
+                cursor default
+            span:before
+                color inherit
+    .custom-label
+        span:before
+            @media screen and (-ms-high-contrast: black-on-white) 
+                display none
+            @media screen and (-ms-high-contrast: white-on-black) 
+                display none
+    .arrow-icon
+        border none
+        &.focus, &:focus, &:hover
+            color $gray50
+            outline none
+    .col-layout
+        border none
+        &.focus, &:focus, &:hover
+            color $gray50
+            outline none
+            .custom-label
+                span
+                    cursor default
+                span:before
+                    color inherit
+
+.actions-details
+    display flex
+    position fixed
+    top 50%
+    right 16px
+    display flex
+    flex-direction column
+    p 
+        margin-bottom 8px
+        background $white
+        &.max-selected
+            background $gray100
+    @media only screen and (max-width 1600px) and (orientation landscape)
+        right 12px
+        font-size 0.75em
+    .review-btn
+        background $white
+        color $primary
+        border 4px solid $primary
+        padding 8px 16px
+        margin 0
+        border-radius 4px
+        font-weight 500
+        @media screen and (-ms-high-contrast: black-on-white) 
+            border 4px solid black
+            color black
+        @media screen and (-ms-high-contrast: white-on-black) 
+            border 4px solid white
+            color white
+
+.feedback
+    &-container
+        padding 2em 0
+        color $gray100
+        .feedback-name
+            h4 
+                font-size 1.5em
+        .feedback-body
+            margin-bottom 2em
+    &-selected
+        font-size 1.25em
+        font-weight 600
+    &-list
+        margin-top 2em
+        border-bottom 1px solid $gray10
+        padding-bottom 2em
+    &-metrics
+        margin-top 1em
+        display flex
+        flex-wrap wrap
+        &_increase, &_decrease
+            // padding 8px 16px
+            color white
+            border-radius 25px
+            font-size 16px
+            font-weight 700
+        &_increase
+            color $successColor
+        &_decrease
+            color $dangerColor
+    &-metric
+        display flex
+        flex 0 0 30%
+        font-weight 900
+        color $gray70
+        // margin-right 32px
+        // display inline-block
+        position relative
+        opacity 0
+        &:before
+            // content '\2022'
+            // margin-right .35em
+        .metric-block
+            flex 0 0 50%
+
+.modal
+    &-header
+        border none
+        .actions-wrapper
+            padding-bottom 0
+            .max-option-selected
+                font-size 0.875em
+            button
+                background transparent
+                color $black
+                padding 0 5px
+                font-size 1.5em
+    &-body
+        .selection
+            &-item
+                display flex
+                padding 0 10px
+                align-items center
+                margin-bottom 1em
+                color $gray50
+                &_group
+                    display flex
+                    flex-direction row
+                    flex-wrap wrap
+                    flex 1
+                    padding 1em
+                    border 1px solid $gray10
+                    border-radius 5px
+                    cursor pointer
+                    .selection-item_group__left
+                        color $primary
+                    &:focus, &.focus, &:hover
+                        color $primary
+                        outline none;
+                        border-color $primary
+                    &__left
+                        flex 1
+                        span
+                            padding-left 1em
+                        i
+                            color $primary
+                &_remove
+                    margin-left 10px
+                    button
+                        background transparent
+                        color $primary
+                        padding 10px
+                        box-shadow none
+                        border 1px solid transparent
+                        &:focus, &.focus, &:hover
+                            outline none
+                            border 1px solid $primary
+                            border-radius 5px
+                        i
+                            font-size 16px
+                        span
+                            padding-left 7px
+                            font-weight 400
+            &-description
+                width 100%
+                padding 0.5em 2em 0 2.3em
+                font-size 0.9em
+                &__text
+                    color $gray70
+            &-itemExpanded
+                .selection-item_group
+                    border-color $primary
+                .selection-item_text
+                    color $primary
+
+
+.selection-list.review
+    .selection-item_group             
+        &:hover
+            @media screen and (-ms-high-contrast: black-on-white)
+                outline 4px solid black
+        &:focus
+            @media screen and (-ms-high-contrast: black-on-white)
+                outline 4px dashed black
+            @media screen and (-ms-high-contrast: white-on-black)
+                outline 4px dashed white
+    .selection-item_remove
+        button 
+            &:hover
+                @media screen and (-ms-high-contrast: black-on-white)
+                    outline 4px solid black
+            &:focus
+                @media screen and (-ms-high-contrast: black-on-white)
+                    outline 4px dashed black
+                @media screen and (-ms-high-contrast: white-on-black)
+                    outline 4px dashed white
+
+.modal-body
+    max-height 700px
+    overflow-y auto
+
+.osd
+    &.feedback-container
+        padding 0
+    .feedback-body
+        margin-bottom 0
+    .feedback-list
+        margin-top 0
+        border-bottom 0
+        padding-bottom 0
+    .feedback-name
+        h4
+            font-size 1em
+            font-weight 600
+    .feedback-explanation
+        display none
+.transeffect
+    opacity 1

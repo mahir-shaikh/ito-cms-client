@@ -1,0 +1,256 @@
+// @import '../../../../assets/css/config'
+
+:host
+	display block
+	padding 0.5em
+
+.exercise-wrapper
+	margin 24px
+	margin-top 0
+	h3
+		color $primary
+		font-weight 600
+
+.matrix-decision
+	border none
+	width 100%
+	tr 
+		background none
+		border-top 1px solid $gray10
+		align-items stretch
+		padding-left 10px
+		padding-top 10px		
+		&.header
+			border none
+	th 
+		background none
+		color $gray100
+		text-align center
+		&:first-child
+			text-align left
+	td
+		text-align center
+		min-width 135px
+		position relative
+		&.focus, &:focus
+			outline 3px solid $primary
+		&.title-field
+			max-width 650px
+			text-align left
+	
+	label 
+		display inline-flex
+
+	input[type="radio"]
+		opacity 0
+		z-index -1
+		position absolute
+		top 50%
+		left 50%
+		transform translate(-50%, -50%)
+		margin 0
+		width 25px
+		height 25px
+
+	input[type="radio"] + label:before
+		content ""
+		width 30px
+		height 30px
+		padding 6px
+		background-clip content-box
+		border 2px solid $gray50
+		border-radius 50%
+
+	input[type="radio"] + label.disabled:before
+		border 2px solid $gray30
+		pointer-events none
+
+
+	input[type="radio"]:checked + label:before
+		border 2px solid $primary
+		background-color $primary
+		@media screen and (-ms-high-contrast: black-on-white) 
+			border 8px solid black
+			width 10px
+			height 10px
+		@media screen and (-ms-high-contrast: white-on-black) 
+			border 8px solid white
+			width 10px
+			height 10px
+
+	input[type="radio"]:checked + label.disabled:before
+		border 2px solid $gray30
+		background-color $gray30
+		pointer-events none
+
+	input[type="radio"].checked + label.disabled:before
+		border 2px solid $gray30
+		background-color $gray30
+		pointer-events none
+
+
+
+.ccs
+	&__row
+		display flex
+		justify-content space-between
+		align-items center
+		&--lw25
+			width 40%
+			text-align center
+		&--rw25
+			width 30%
+			text-align center
+
+		&--cw50
+			width 40%
+			text-align left
+		
+		&--lw25, &--rw25, &--cw50
+			font-size .8em
+			font-weight bold
+			position relative
+			margin-top 0	
+		&--cwf50
+			width 40%
+			text-align left
+			display flex
+			align-items center
+			h3 
+				font-size 1em
+				margin: .5em 0
+
+	&__header
+		text-align center
+		line-height 24px
+		color $gray70
+		height 64px
+		padding-left 10px
+
+	&__data
+		border-top 1px solid $gray10
+		align-items stretch
+		padding-left 10px
+		padding-top 10px
+		h3 
+			color $primary
+			font-weight 600
+		&.focus, &:focus
+			outline 3px solid $primary
+		
+		input[type="radio"]
+			opacity 0
+			z-index -1
+			position absolute
+			top 50%
+			left 50%
+			transform translate(-50%, -50%)
+			margin 0
+			width 25px
+			height 25px
+
+		input[type="radio"] + label:before
+			content ""
+			width 30px
+			height 30px
+			padding 6px
+			background-clip content-box
+			border 2px solid $gray50
+			border-radius 50%
+
+		input[type="radio"] + label.disabled:before
+			border 2px solid $gray30
+			pointer-events none
+
+		/* input[type="radio"] + label:focus:before
+			@media screen and (-ms-high-contrast: black-on-white) 
+				border 4px dashed black
+			@media screen and (-ms-high-contrast: white-on-black) 
+				border 4px dashed white  */
+
+
+		input[type="radio"]:checked + label:before
+			border 2px solid $primary
+			background-color $primary
+			@media screen and (-ms-high-contrast: black-on-white) 
+				border 8px solid black
+				width 10px
+				height 10px
+			@media screen and (-ms-high-contrast: white-on-black) 
+				border 8px solid white
+				width 10px
+				height 10px
+
+		input[type="radio"]:checked + label.disabled:before
+			border 2px solid $gray30
+			background-color $gray30
+			pointer-events none
+
+		input[type="radio"].checked + label.disabled:before
+			border 2px solid $gray30
+			background-color $gray30
+			pointer-events none
+		/* input[type="radio"]:checked + label:before
+
+		input[type="radio"]:hover + label:before
+			border 2px solid #999999 */
+		
+
+		label
+			display inline-flex
+			align-items center
+			max-width fit-content
+			margin-bottom unset
+			font-weight unset
+			padding 10px 30px
+			&:hover
+				outline 3px dashed $primary
+			&.disabled
+				&:hover
+					pointer-events none
+		label.focused
+			outline 3px solid $primary
+			color $primary
+			@media screen and (-ms-high-contrast: black-on-white)
+				outline 4px dashed black
+			@media screen and (-ms-high-contrast: white-on-black)
+				outline 4px dashed white
+		label.focused.disabled
+			pointer-events none
+			outline none
+
+
+	&__buttonArea
+		height 100px
+		display flex
+		align-items center
+		justify-content flex-end
+	
+	&__button
+		display flex
+		width 150px
+		height 48px
+		color $white
+		margin 10px 30px
+		cursor pointer
+
+		&--left
+			background-color $primary
+			width 70%
+			display flex
+			align-items center
+			justify-content center
+			border-radius 6px 0 0 6px
+		&--right
+			background-color $primary
+			color $white
+			width 30%
+			display flex
+			align-items center
+			justify-content center
+			border-radius 0 6px 6px 0
+
+
+.feedback-wrapper
+	margin 0 0 0 32px
+	max-width 900px

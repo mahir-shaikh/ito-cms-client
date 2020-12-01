@@ -1,0 +1,120 @@
+
+// @import '../../../../assets/css/config'
+
+h2 
+    font-size 21px
+    margin .5em 0
+
+.single-select-radio
+    .email
+        &-header
+            display flex
+            align-items center
+            padding 0 1em
+            box-shadow: 0px 10px 9px 3px rgba(0, 0, 0, 0.10)
+        &-avatar
+            padding 15px 0
+            &_shadow
+                border-radius 75px
+                border 5px solid $almostWhite
+                background $primary
+                color $white
+                width 90px
+                height 90px
+                margin 0 auto
+                font-size 2em
+                text-align center
+                line-height 80px
+                img
+                    width 80px
+        &-from
+            font-size .85em
+            font-weight 600
+        &-direction
+            font-weight normal
+            h2 
+                font-size 21px
+                margin .5em 0
+        &-info
+            flex 1
+            padding 0 1em
+        &-icon
+            padding 1em
+            font-size 1.5em
+            color $primary
+    .radio
+        &-container
+            padding 32px 0
+            margin 0 32px 
+            max-width 800px
+            width calc(100% - 64px)
+            @media screen and (max-width 1280px)
+                padding 20px 1em
+            .radio-exercise-wrapper
+                margin-bottom 32px
+        &-narrative
+            font-weight: 500;
+            font-size: 15px;
+            color: $black;
+            cursor initial
+        &-question
+            text-align left
+            padding: 1em 1em 1em 0;
+            font-weight 600
+            font-size 1.2em
+            color $alt-dark-color
+        &-item
+            label
+                font-weight normal
+                display flex
+                align-items center
+                margin 0
+                .radio-text
+                    color $gray70
+                    padding-top 0.7em
+                &:before 
+                    font-family FabricMDL2Icons
+                    content ""
+                    margin 0 1em 0 0
+                    font-size 1.5em
+                &:focus
+                    .radio-text
+                        color $primary
+                    @media screen and (-ms-high-contrast: black-on-white) 
+                        border 6px solid black
+                    @media screen and (-ms-high-contrast: white-on-black) 
+                        border 6px solid white
+                &:hover
+                    .radio-text
+                        color $gray100
+                    @media screen and (-ms-high-contrast: black-on-white) 
+                        border 3px solid black
+                    @media screen and (-ms-high-contrast: white-on-black) 
+                        border 3px solid white
+
+
+            input[type='radio']
+                &:checked + label
+                    &:before
+                        content ""
+            
+        &-itemSelected
+            @media screen and (-ms-high-contrast: black-on-white) 
+                border 4px solid black
+                border-radius $radiusMedium
+            @media screen and (-ms-high-contrast: white-on-black) 
+                border 4px solid white
+                border-radius $radiusMedium
+            label
+                .radio-text
+                    color $white
+                &:focus, &.focus, &:hover
+                    .radio-text
+                        color $white
+
+.feedback-container
+    min-height 100vh
+    overflow auto
+
+p
+    max-width 100%

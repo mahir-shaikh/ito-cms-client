@@ -1,0 +1,236 @@
+<!-- <span id="assistive" class="assistive-text" aria-live="polite" aria-relevant="additions text">
+    {{ assistiveText }}
+</span> -->
+<div *ngIf="data && !justShowSelection" [attr.aria-hidden]="reviewModalRef.isShown">
+    <section class="accContainer" *ngIf="data && data.categories">
+        <div class="accordion" *ngFor="let cat of data.categories; let i = index;">
+            <!-- <h2 class="accordion-heading" *ngIf="cat.heading">{{ cat.heading }}</h2> -->
+            <ul class="accordion-list">
+                <li class="card" *ngFor="let item of cat.items; let j = index;"
+                    [ngClass]="{ 'card-checked': item.isChecked, 'card-disabled': (isSelectionDisabled && !item.isChecked), 'card-border' : !isSelectionDisabled && (item.checkboxHasFocus || item.iconHasFocus) }">
+                    <div class="card-header" id="heading{{i}}{{j}}Check">
+                        <label class="col-layout"
+                            [tabindex]="reviewModalRef.isShown ? -1 : (isSelectionDisabled && !item.isChecked) ? -1 : 0"
+                            (keydown)="checkboxClicked(i, j, $event)" (focus)="item.checkboxHasFocus = true;"
+                            (blur)="item.checkboxHasFocus = false" >
+
+                            <div class="custom-label">
+                                <input type="checkbox" id="checkbox{{i}}{{j}}" [checked]="item.isChecked ? true : false"
+                                    (change)="checkboxClicked(i, j)"
+                                    [disabled]="(isSelectionDisabled && !item.isChecked)" tabindex="-1" >
+                                <label id="checkboxText{{i}}{{j}}" for="checkbox{{i}}{{j}}" [attr.aria-label]="item.prefix +'. '+ item.name" tabindex="-1" role="none">
+                                    <span style="padding-top: 0.5em;">
+                                        <span
+                                            [innerHTML]="item.text"></span>
+                                    </span>
+                                </label>
+                            </div>
+
+                            <!-- <label for="checkbox{{i}}{{j}}" class="custom-label">
+                                <input type="checkbox" id="checkbox{{i}}{{j}}" [checked]="item.isChecked ? true : false"
+                                    (change)="checkboxClicked(i, j)" aria-label="Select to toggle"
+                                    [disabled]="isSelectionDisabled && !item.isChecked">
+                                <span [innerHTML]="item.name"></span>
+                            </label> -->
+                        </label>
+                        <label [tabindex]="reviewModalRef.isShown ? -1 : (isSelectionDisabled ? -1 : 0)"
+                            (keydown)="toggleAccordian(i,j, $event)" (click)="toggleAccordian(i,j)" class="arrow-icon"
+                            (focus)="item.iconHasFocus = true;" (blur)="item.iconHasFocus = false"
+                            *ngIf="item.description" role="button" [attr.aria-expanded]="item.isOpen"
+                            attr.aria-label="Show {{item.isOpen ? 'less' : 'more'}} about {{item.name}}">
+                            <i [class]="item.isOpen ? 'icon-expand-arrow-up' : 'icon-expanded-arrow'"></i>
+                        </label>
+                    </div>
+                    <div id="collapse{{i}}{{j}}Check" class="collapse" [ngClass]="item.isOpen ? 'show' : ''"
+                        [attr.aria-hidden]="!item.isOpen" *ngIf="item.description" role="alert">
+                        <div class="card-body" [innerHTML]="item.description"></div>
+                    </div>
+                </li>
+
+                <!-- <div class="card" *ngFor="let item of data.items; let i = index;"
+                    [ngClass]="{ 'card-checked': item.isChecked, 'card-disabled': (isSelectionDisabled && !item.isChecked), 'card-border' : isSelectionDisabled && (item.checkboxHasFocus || item.iconHasFocus) }"
+                    role="region" aria-label="Select to toggle">
+                    <div class="card-header" id="heading{{i}}Check">
+                        <div class="col-layout"
+                            [tabindex]="reviewModalRef.isShown ? -1 : (isSelectionDisabled && !item.isChecked) ? -1 : 0"
+                            (keydown)="checkboxClicked(i, $event)" (focus)="item.checkboxHasFocus = true"
+                            (blur)="item.checkboxHasFocus = false">
+                            <label for="checkbox{{i}}" class="custom-label">
+                                <input type="checkbox" id="checkbox{{i}}" [checked]="item.isChecked ? true : false"
+                                    (change)="checkboxClicked(i)" aria-label="Select to toggle"
+                                    [disabled]="isSelectionDisabled && !item.isChecked">
+                                <span [innerHTML]="item.name"></span>
+                            </label>
+                        </div>
+                        <div [tabindex]="isSelectionDisabled ? -1 : 0" (keydown)="toggleAccordian(i, $event)"
+                            (click)="toggleAccordian(i)" class="arrow-icon" (focus)="item.iconHasFocus = true"
+                            (blur)="item.iconHasFocus = false">
+                            <i [class]="item.isOpen ? 'icon-expand-arrow-up' : 'icon-expanded-arrow'"></i>
+                        </div>
+                    </div>
+                    <div id="collapse{{i}}Check" class="collapse" [ngClass]="item.isOpen ? 'show' : ''"
+                        [attr.aria-hidden]="!item.isOpen" role="alert">
+                        <div class="card-body" [innerHTML]="item.description"></div>
+                    </div>
+                </div> -->
+
+            </ul>
+        </div>
+    </section>
+    <section class="pin-modal__footer actions-wrapper" *ngIf="!showFeedback">
+        <div class="actions-details">
+            <p class="max-option-selected" [attr.aria-live]="reviewModalRef.isShown ? 'off' : 'polite'"
+                aria-relevant="additions text" [ngClass]="{ 'max-selected': selected.length == data.maximum }">
+                {{selected.length}} of {{data.maximum}} {{statusText}} Selected
+            </p>
+            <button id="reviewBtn" class="btn btn-primary review-btn" (click)="openReview()" *ngIf="showReviewBtn"
+                aria-label="Review your selections">
+                <i class="ms-icons" aria-hidden="true"></i>
+                Review
+            </button>
+        </div>
+    </section>
+</div>
+<div class="feedback-container animated fadeIn" [class.osd]="justShowSelection"
+    *ngIf="(showFeedback && triggerFeedback) || justShowSelection" role="alert">
+    <div class="feedback-body">
+        <h3 class="feedback-explanation" *ngIf="scene.fb_explanation">
+            <div [innerHtml]="scene.fb_explanation"></div>
+        </h3>
+        <h3 class="feedback-selected" *ngIf="!justShowSelection">
+            <span *ngIf="!isSummary">
+                In this event, you selected:
+            </span>
+            <span *ngIf="isSummary">
+                You Selected:
+            </span>
+        </h3>
+        <div class="feedback-list" *ngFor="let s of selected">
+            <div class="feedback-name">
+                <h4 [innerHTML]="s.name"></h4>
+            </div>
+            <div class="feedback-metrics" *ngIf="!justShowSelection">
+                <div class="metricComeIn" *ngIf="s.feedbackText != null">
+                    <span class="feedback-metrics_text" [innerHTML]="s.feedbackText"></span>
+                </div>
+                <div class="feedback-metric metricComeIn" *ngIf="s.feedback1 != 0">
+                    <span class="feedback-metrics_text metric-block">
+                        <!-- <ism-text-output [key]="'DashboardKeyMetric1_R'+pinEpisodeIndex"></ism-text-output> -->
+                    </span>
+                    <span
+                        [class.feedback-metrics_increase]="(s.feedback1 == 1 && !s.feedback1Reversed) || (s.feedback1 == -1 && s.feedback1Reversed)"
+                        [class.feedback-metrics_decrease]="(s.feedback1 == -1 && !s.feedback1Reversed) || (s.feedback1 == 1 && s.feedback1Reversed)"
+                        class="metric-block">
+                        {{ s.feedback1Text }}
+                    </span>
+                </div>
+                <div class="feedback-metric metricComeIn" *ngIf="s.feedback2">
+                    <span class="feedback-metrics_text metric-block">
+                        <!-- <ism-text-output [key]="'DashboardKeyMetric2_R'+pinEpisodeIndex"></ism-text-output> -->
+                    </span>
+                    <span
+                        [class.feedback-metrics_increase]="(s.feedback2 == 1 && !s.feedback2Reversed) || (s.feedback2 == -1 && s.feedback2Reversed)"
+                        [class.feedback-metrics_decrease]="(s.feedback2 == -1 && !s.feedback2Reversed) || (s.feedback2 == 1 && s.feedback2Reversed)"
+                        class="metric-block">
+                        {{ s.feedback2Text }}
+                    </span>
+                </div>
+                <div class="feedback-metric metricComeIn" *ngIf="s.feedback3">
+                    <span class="feedback-metrics_text metric-block">
+                        <!-- <ism-text-output [key]="'DashboardKeyMetric3_R'+pinEpisodeIndex"></ism-text-output> -->
+                    </span>
+                    <span
+                        [class.feedback-metrics_increase]="(s.feedback3 == 1 && !s.feedback3Reversed) || (s.feedback3 == -1 && s.feedback3Reversed)"
+                        [class.feedback-metrics_decrease]="(s.feedback3 == -1 && !s.feedback3Reversed) || (s.feedback3 == 1 && s.feedback3Reversed)"
+                        class="metric-block">
+                        {{ s.feedback3Text }}
+                    </span>
+                </div>
+                <div class="feedback-metric metricComeIn" *ngIf="s.feedback4">
+                    <span class="feedback-metrics_text metric-block">
+                        <!-- <ism-text-output [key]="'DashboardKeyMetric4_R'+pinEpisodeIndex"></ism-text-output> -->
+                    </span>
+                    <span
+                        [class.feedback-metrics_increase]="(s.feedback4 == 1 && !s.feedback4Reversed) || (s.feedback4 == -1 && s.feedback4Reversed)"
+                        [class.feedback-metrics_decrease]="(s.feedback4 == -1 && !s.feedback4Reversed) || (s.feedback4 == 1 && s.feedback4Reversed)"
+                        class="metric-block">
+                        {{ s.feedback4Text }}
+                    </span>
+                </div>
+                <div class="feedback-metric metricComeIn" *ngIf="s.feedback5">
+                    <span class="feedback-metrics_text metric-block">
+                        <!-- <ism-text-output [key]="'DashboardKeyMetric5_R'+pinEpisodeIndex"></ism-text-output> -->
+                    </span>
+                    <span
+                        [class.feedback-metrics_increase]="(s.feedback5 == 1 && !s.feedback5Reversed) || (s.feedback5 == -1 && s.feedback5Reversed)"
+                        [class.feedback-metrics_decrease]="(s.feedback5 == -1 && !s.feedback5Reversed) || (s.feedback5 == 1 && s.feedback5Reversed)"
+                        class="metric-block">
+                        {{ s.feedback5Text }}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- <section class="pin-modal__footer">
+        <button class="btn btn-primary submit-btn" (click)="submitResponse()" aria-label="Continue Button">
+            <div class="submit-btn__text">Continue</div>
+            <div class="submit-btn__icon">
+                <span class="digital-ico"></span>
+            </div>
+        </button>
+    </section> -->
+</div>
+<app-feedback-generic *ngIf="showFeedback" [scene]="data"></app-feedback-generic>
+<app-citations [scene]="data" *ngIf="!justShowSelection"></app-citations>
+
+<div bsModal #reviewModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-label="Review your selections"
+    aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg" *ngIf="data" cdkTrapFocus>
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="actions-wrapper">
+                    <h4 class="modal-title max-option-selected"
+                        [ngClass]="{ 'max-selected': selected.length == data.maximum }" aria-live="assertive"
+                        aria-relevant="additions text">
+                        {{selected.length}} of {{data.maximum}} {{statusText}} Selected
+                    </h4>
+                    <button type="button" class="pull-right" aria-label="Close" (click)="closeReview();" autoFocus>
+                        <span aria-hidden="true" class="ms-icons"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="selection-list review">
+                    <div class="selection-item" [ngClass]="{ 'selection-itemExpanded': s.isReviewOpen }"
+                        *ngFor="let s of selected; let i = index;">
+                        <div class="selection-item_group" (click)="s.isReviewOpen = !s.isReviewOpen"
+                            (keydown)="toggleReview(i, $event)" tabindex="0" role="region"
+                            [attr.aria-label]="s.description ? ('Show'+ (s.isReviewOpen ? 'less' : 'more') + s.name) : s.name"
+                            [attr.aria-expanded]="s.isReviewOpen">
+                            <div class="selection-item_group__left">
+                                <i class="ms-icons" aria-hidden="true"></i>
+                                <span class="selection-item_text" [innerHTML]="s.name"></span>
+                            </div>
+                            <div class="selection-item_group__right" *ngIf="s.description">
+                                <i [class]="s.isReviewOpen ? 'icon-expand-arrow-up' : 'icon-expanded-arrow'"></i>
+                            </div>
+                            <div id="collapse{{i}}" class="selection-description collapse"
+                                [ngClass]="s.isReviewOpen ? 'show' : ''" [attr.aria-hidden]="!s.isReviewOpen"
+                                role="alert" *ngIf="s.description">
+                                <div class="selection-description__text" [innerHTML]="s.description"></div>
+                            </div>
+                        </div>
+                        <div class="selection-item_remove">
+                            <button type="button" class="btn btn-primary" attr.aria-label="Remove {{ s.name }}"
+                                (click)="removeSelection(i);">
+                                <i class="ms-icons" aria-hidden="true"></i>
+                                <span>Remove</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

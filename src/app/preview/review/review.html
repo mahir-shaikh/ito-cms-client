@@ -1,0 +1,70 @@
+<div class="review-choices animated fadeInUp" ismaScrollTo>
+	<div class="scenarioText">
+		<h1>
+			<isma-text-output key="name" [sceneId]="pinID" asInnerHtml="true" displayKeyIncaseUndefined="false">
+			</isma-text-output> feedback
+		</h1>
+	</div>
+	<!-- Single Select -->
+	<div *ngIf="pinType == 4">
+		<!-- <div class="scenarioText"> -->
+		<!-- 	<isma-text-output key="narrative" [sceneId]="pinID" asInnerHtml="true"></isma-text-output> -->
+		<!-- </div> -->
+		<div class="eventBody" aria-live="polite" aria-relevant="additions text">
+			<!-- <h2><isma-text-output key="You Selected"></isma-text-output></h2> -->
+			<h2 *ngIf="!isSummary">In this event, you selected:</h2>
+			<h2 *ngIf="isSummary">You selected:</h2>
+			<!-- <span>{{ getChar(selectedValue)}}. </span><span [innerHTML]="localScene['alt' + selectedValue]"></span> -->
+			<span [innerHTML]="localChoices[selectedValue - 1].text"></span>
+		</div>
+		<div class="review-button-container" *ngIf="(!hasGenericFeedback || hasIndividualFeedback) && !hasBranching">
+			<button [class.notShown]="showReview == false" class="btn review-button" (click)="toggleReview()">
+				<i class="ms-icons {{showReview ? 'ms-close' : 'ms-check-circle'}}" aria-hidden="true"></i>
+				<isma-text-output key="Review options" asInnerHtml="true" *ngIf="!showReview"></isma-text-output>
+				<isma-text-output key="Close review" asInnerHtml="true" *ngIf="showReview"></isma-text-output>
+			</button>
+		</div>
+		<div class="scenarioText review-options-text" *ngIf="showReview">
+			<h3>
+				<isma-text-output key="Review options" asInnerHtml="true"></isma-text-output>
+			</h3>
+			<p class="review_note">
+				<i class="ms-icons" aria-label="Your Choice Indicator"></i>
+				<em>indicates your choice. This cannot be changed.</em>
+			</p>
+		</div>
+
+		<div class="eventBody-container">
+			<div class="narrative-section" *ngIf="showReview">
+				<div class="choice-btn-container" role="tablist">
+					<button class="choice" *ngFor="let choice of localChoices; let i=index"
+						[class.active]="answer == (i+1)" (click)="answer = (i+1)" [tabindex]="answer == (i+1) ? 0 : -1"
+						(keydown)="handleKeyboardEvent($event, i)" (focus)="answer = (i+1)" role="tab"
+						attr.aria-label="Tab {{ i + 1 }}" id="ReviewTab{{i+1}}">
+						<i [ngClass]="{'ms-check-circle': selectedValue == i+1}" aria-label="Your Choice Indicator"></i>
+						<label class="event-choice" attr.for="{{pinID}}-choice-{{i}}">{{ getChar(choice.id) }}</label>
+					</button>
+				</div>
+				<div class="eventBody" role="tabpanel" aria-live="polite" aria-relevant="additions text" tabindex="0">
+					<span [innerHTML]="localScene['alt' + answer]"></span>
+				</div>
+			</div>
+			<div class="feedback-section" aria-live="polite" aria-relevant="additions text" tabindex="0">
+				<div class="eventBody">
+					<div *ngIf="hasGenericFeedback">
+						<app-feedback-generic [scene]="data" ></app-feedback-generic>
+					</div>
+					<h3 *ngIf="!hasGenericFeedback">
+						Feedback
+					</h3>
+					<span [innerHTML]="localScene['alt' + answer + '_feedback']"
+						*ngIf="localScene['alt' + answer + '_feedback']"></span>
+					<div *ngIf="hasCitations">
+						<app-citations [scene]="data"></app-citations>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

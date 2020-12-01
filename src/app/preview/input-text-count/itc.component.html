@@ -1,0 +1,25 @@
+<div class="itc__container">
+	<div *ngIf="xtraChar == 0">({{maxChar}} character maximum)</div>
+	<div *ngIf="xtraChar > 0" class="itc__redText">Unique Values must be {{maxChar}} characters or fewer</div>
+
+	<!-- <textarea 
+		class="itc__text" [ngClass]="xtraChar > 0 ? 'error' : 'normal'" 
+		rows="{{rows}}" cols="100" 
+		(keyup)="countChar($event)" 
+		placeholder="{{placeHolder}}"></textarea> -->
+
+	<div [attr.contenteditable]="true" class="itc__text"
+		[ngClass]="{ 'error': xtraChar > 0, 'normal': xtraChar === 0}"
+		[style.height]="rows * 28 + 'px'" id="myEditable" [tabindex]="0" (blur)="xtraCharRed($event)"
+		role="textbox" [attr.aria-label]="placeHolder" #textArea>{{textValue}}</div>
+
+	<div [ngClass]="xtraChar <= 0 ? 'itc__grayText' : 'itc__redText'" aria-live="polite" aria-relevant="additions text">
+		{{ xtraChar <= 0 ? (remainingChar + ' characters left') : (xtraChar + ' characters too many') }}
+	</div>
+	<!-- <div *ngIf="xtraChar > 0" class="itc__redText" aria-live="polite" aria-relevant="additions text">
+		{{xtraChar}} characters too many
+	</div> -->
+
+	<app-feedback-generic [scene]="data"></app-feedback-generic>
+    <app-citations [scene]="data"></app-citations>
+</div>

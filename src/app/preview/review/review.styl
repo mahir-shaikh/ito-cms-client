@@ -1,0 +1,123 @@
+// @import '../../../../assets/css/config.styl'
+
+:host
+    width 100%
+    height 100%
+    // overflow-y auto
+
+.review-choices
+    -webkit-box-orient vertical
+    -webkit-box-direction normal
+    -ms-flex-direction column
+    flex-direction column
+    height 100%
+    position relative
+    // margin-bottom 2rem
+    .scenarioText
+        h1
+            max-width calc(100% - 20%) !important
+    .scenarioText, .eventBody
+        padding 16px 0
+        max-width 750px
+        margin-left 2em
+        margin-right 2em
+        @media only screen and (max-width 1200px)
+            max-width 600px
+        h1 
+            color $gray100
+        @media only screen and (max-width 560px)
+            font-size $fontSize12
+            padding 10px
+    .eventBody
+        padding 0
+        h2 
+            margin-bottom 1em
+    .review-options-text
+        font-weight 600
+        padding 0 0 20px 0
+        h3 
+            color $alt-color
+    
+    .eventBody-container
+        // height 100%
+        .choice-btn-container
+            text-align center
+            background $white
+            display flex
+            max-width 750px
+            margin-left 32px
+            margin-bottom 24px
+            .choice
+                text-align center
+                background none
+                border none
+                border-bottom 2px solid $gray30
+                margin-top 0.3rem
+                padding 0 32px
+                font-size 1.5em
+                color $gray70
+                cursor pointer
+                flex 1
+                i 
+                    margin-right .2em
+                    color $primary
+                @media only screen and (max-width 1280px)
+                    font 1.2rem
+                &:hover  
+                    color $gray100
+                    border-bottom 2px solid $gray50
+
+                label
+                    font-weight 400
+                    margin-bottom 0
+            .active
+                color $gray100
+                font-weight 600
+                border-bottom 4px solid $primary
+
+        .eventBody
+            h3
+                text-align left
+                font-weight 600
+        .narrative-section
+            color $gray100
+            h3
+                color $accent02
+        .feedback-section
+            color $gray100
+            padding 1.5em 0
+
+.review_note
+    color $gray70
+    font-size 85%
+    i
+        margin-right .3em
+
+
+.review-button-container
+    position absolute  
+    top 16px
+    right 16px
+    border-radius 4px
+    .review-button
+        padding 4px 16px
+        background $primary
+        color $white
+        border 1px solid $primary
+        &:focus
+            outline 3px dashed $primary
+        &.notShown
+            background $white
+            color $primary
+        i 
+            margin-right .25em
+
+.drag-drop-container,
+.multiSelectAccordion-container,
+.columnMultiDrag-container,
+.org-chart-container,
+.itextCount-container,
+.matrix-container,
+.rankingMultiColumn-container,
+.matching-container
+    padding 1rem

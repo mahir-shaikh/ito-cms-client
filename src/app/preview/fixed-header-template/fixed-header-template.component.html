@@ -1,0 +1,19 @@
+<div class="fixed-header-template">
+    <div class="header-title">
+        <h1>
+            {{header.name}}
+        </h1>
+    </div>
+    <div class="header-body">
+        <div class="header-content" [innerHtml]="header.narrative" *ngIf="header.narrative"></div>
+        <div class="header-data" *ngIf="header.osdPin">
+            <app-multiselect-accordion [data]="header.osdPin" [justShowSelection]="true">
+            </app-multiselect-accordion>
+        </div>
+        <div class="header-question" [class.no-pb]="header.osdPin" [innerHtml]="header.osd" *ngIf="header.osd"></div>
+
+
+        <!-- Puting this here for correct Tab Index -->
+        <!-- <app-hint-modal [pinID]="header.ID" [hideHint]="isDisabled"></app-hint-modal> -->
+    </div>
+</div>

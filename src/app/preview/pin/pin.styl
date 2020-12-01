@@ -1,0 +1,127 @@
+// @import '../../../assets/css/config'
+
+@keyframes buttonpulse
+    0%
+        opacity .2
+    50%
+        opacity 1
+    100%
+        opacity .2
+.pin
+    // &-modal
+    //     &:focus
+    //         outline none
+    //     &_content
+    //         &:focus
+    //             outline none
+    &-dragDrop, &-multiSelectAccordion, &-ccSelection, &-multiPageSelection
+        margin 0 0 0 32px
+        max-width 850px
+        width calc(100% - 64px)
+        @media only screen and (max-width 1280px)
+            margin auto 1em
+    &-coulmnMultiSelect
+        margin 0 2em
+        max-width 900px
+    &-itextCount
+        padding 0 2em
+    &Hidden
+        display none
+    &-item
+        margin 2px
+    &Viewed &-icon-image
+        font-weight normal
+        opacity 0.7
+    &Holder
+        display none
+    &Holder.mainContentActive
+        height 100%
+        display inherit
+    &-planningtool.active,
+    &-infoupdatepage.active,
+    &-chooser.active
+        height 100%
+        position relative
+    &-item
+        cursor pointer
+        transition-property all
+        transition-duration .2s
+        transition-timing-function ease-in
+        border-radius 20px
+        transition-delay 0.1s
+        color #fff
+        border-radius  0
+        font-weight 400
+        font-size 1.5em
+        overflow hidden
+        padding 3px 5px 3px 0 
+        /* @media only screen and (max-width 1600px)
+            font-size 18px
+        @media only screen and (max-width 1400px)
+            font-size 16px
+        @media only screen and (max-width 1240px)
+            font-size 14px */
+        &.pinViewed
+             &.infoUpdate,
+             &.event,
+             &.opportunity 
+                .pin-title:before
+                    box-shadow 0px 0px 0px 0px transparent
+        &:hover
+            background-color rgba(255, 255, 255, 0.5)
+         &.infoUpdate
+            .pin-title:before
+                content ''
+                font-family 'icomoon'
+                font-size 0.875em
+                padding 5px
+                border-radius 15px
+                background rgba(255, 255, 255, 1)
+                margin-right .5em
+                color $blue1
+                box-shadow 0px 0px 6px 3px $blue4
+                @media only screen and (max-width 1200px)
+                    font-size 12px
+        &.event
+           .pin-title:before
+                content ''
+                font-family 'icomoon'
+                font-size 0.875em
+                padding 5px
+                border-radius 15px
+                background rgba(#fff, 1)
+                margin-right .5em
+                color $blue1
+                box-shadow 0px 0px 6px 3px $blue4
+                @media only screen and (max-width 1200px)
+                    font-size 12px
+        &.opportunity 
+            .pin-title:before
+                content ''
+                font-family 'icomoon'
+                font-size 0.875em
+                padding 5px
+                border-radius 15px
+                background rgba(#fff, 1)
+                margin-right .5em
+                color $blue1
+                box-shadow 0px 0px 6px 3px $blue4
+                @media only screen and (max-width 1200px)
+                    font-size 12px
+        .pin-title
+            white-space nowrap
+            text-overflow ellipsis
+            overflow-x hidden
+            display inline-block
+            font-family 'IBMSans'
+            max-width 100%
+            padding 5px 5px 8px
+            &:before
+                margin 4px 6px 
+    &-dragDrop
+        @media only screen and (max-width 960px)
+            width 100%
+            margin 0
+            .goal.fixedHeight
+                height 13em
+

@@ -1,0 +1,6 @@
+<div class="citations-wrapper" *ngIf="scene.fb_citations">
+  <h3 class="feedback-heading" *ngIf="scene.fb_citations">Citations</h3>
+  <div class="feedback-data" *ngIf="scene.fb_citations">
+    <div [innerHtml]="scene.fb_citations"></div>
+  </div>
+</div>

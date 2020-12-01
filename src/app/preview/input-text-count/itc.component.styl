@@ -1,0 +1,36 @@
+// @import '../../../../assets/css/config'
+
+.itc
+  &__container
+    display flex
+    flex-direction column
+    max-width 900px
+  &__text
+    width 100%
+    border-radius 6px
+    margin 5px 0
+    padding 5px 10px
+    overflow-x hidden
+    overflow-y auto
+    word-wrap break-word
+
+    &.normal
+      border 1px solid $gray30
+      background-color: $white
+    &.error  
+      border: 1px solid $dangerColor
+      background-color $gray05
+    
+    &:focus
+      outline none
+      box-shadow none
+  &__grayText
+    color $gray70
+    font-size 0.9em
+  &__redText
+    color $red
+    font-weight bold
+
+
+.invisible
+  visibility hidden

@@ -1,0 +1,131 @@
+// @import '../../../../assets/css/config'
+
+.intro-goals
+    // padding-bottom 1em
+    ul
+        list-style none
+        padding 0
+        li.focus, li:focus
+            outline 3px solid $primaryDarkened
+
+// .goal-0
+//     background $primary
+//     .goal-index
+//         background-color darken($primary, 10)
+// .goal-1
+//     background $accent01
+//     .goal-index
+//         background-color darken($accent01, 10)
+// .goal-2
+//     background $accent03
+//     .goal-index
+//         background-color darken($accent03, 10)
+
+.match-0
+    background none
+    
+.match-details
+    color $gray70
+
+.goal-details
+    color $white
+    @media only screen and (max-width 1280px)
+        font-size .9em
+
+.goal, .match
+    display flex
+    &:not(:last-child)
+        margin-bottom 10px
+    cursor move
+    &.fixedHeight
+        height 10em
+        @media only screen and (max-width 960px)
+            height 13.5em
+    &.cdk-drag-disabled
+        background $gray50 !important
+        pointer-events: none;
+        .goal-details
+            background none !important
+        .goal-index
+            background $gray50 !important
+    &-container
+        // padding-bottom 1em
+        @media screen and (max-width 1280px)
+            margin 1em
+        ul
+            list-style none
+            padding 0
+            margin 0
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex: 1;
+            li.focus, li:focus
+                outline 8px dashed $secondary
+            &.flex-basis-30
+                flex-basis 30%
+        // &.col-0
+        //     .goal-details
+        //         background-color $primary
+        //     .goal-index
+        //         background-color darken($primary, 10)
+        // &.col-1
+        //     .goal-details
+        //         background-color $accent01
+        //     .goal-index
+        //         background-color darken($accent01, 10)
+        // &.col-2
+        //     .goal-details
+        //         background-color $accent03
+        //     .goal-index
+        //         background-color darken($accent03, 10)
+            
+    &-list
+        max-width 100%
+        &__note
+            // font-size 0.9em
+            // color $gray70
+            margin 5px 0
+            font-weight 600
+            font-size 1.2em
+            color $alt-color
+            max-width 750px
+    &-details
+        display flex
+        flex 1
+        border-radius $radiusSmall
+        @media screen and (-ms-high-contrast: black-on-white)
+            border solid 1px black
+        @media screen and (-ms-high-contrast: white-on-black)
+            border solid 1px white
+    &-index, &-icon
+        display flex
+        justify-content center
+        align-items center
+        padding 1.7em 2em
+        border-top-left-radius $radiusSmall
+        border-bottom-left-radius $radiusSmall
+    &-index
+        font-weight bold
+        font-size 1.2em
+    &-text
+        flex 1
+        display flex
+        align-items center
+        padding 1em 0 1em 1em
+    &-selected
+        font-style italic
+
+.match
+    cursor default
+    margin 0 10px 10px 0
+
+    &:last-child
+        margin-bottom 0
+
+.wrapper
+    display flex
+    padding 1em 0 25px
+
+.invisible
+    visibility hidden
