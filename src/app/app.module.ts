@@ -28,6 +28,10 @@ import { MatrixComponent } from './preview/matrix/matrix.component';
 import { MultiselectAccordionComponent } from './preview/multiselect-accordion/multiselect-accordion.component';
 import { SingleSelectRadioComponent } from './preview/single-select-radio/single-select-radio.component';
 import { EditorComponent } from './editor/editor.component';
+import { ContextMenuService } from './services/context-menu.service';
+import { ContextMenuComponent } from './context-menu/context-menu.component';
+import { ContextMenuDirective } from './directives/context-menu.directive';
+import { CommunicatorService } from './services/communicator.service';
 
 
 const pinComponents = [PinComponent, InfoUpdateComponent, CitationsComponent, ColumnMultiDragComponent, ColumnMultiSelectComponent, DragdropComponent, FeedbackGenericComponent, FixedHeaderTemplateComponent, InputTextCount, MatrixComponent, MultiselectAccordionComponent, SingleSelectRadioComponent]
@@ -43,15 +47,17 @@ const pinComponents = [PinComponent, InfoUpdateComponent, CitationsComponent, Co
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot()
   ],
-  declarations: [			
+  declarations: [
     AppComponent,
     UploadComponent,
     AuthorComponent,
     PreviewComponent,
     pinComponents,
-      EditorComponent
-   ],
-  providers: [UploadService, AuthorService],
+    EditorComponent,
+    ContextMenuComponent,
+    ContextMenuDirective
+  ],
+  providers: [UploadService, AuthorService, ContextMenuService, CommunicatorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

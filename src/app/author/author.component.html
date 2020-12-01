@@ -27,11 +27,12 @@
       </div>
     </div>
 
-    <button class="btn btn-sm btn-success mr-2" (click)="saveData()">
+    <button class="btn btn-sm btn-success mr-2" (click)="saveRawData()">
       <span class="fa fa-check">Save</span>
     </button>
   </div>
   <div class="col-5 preview">
+    <app-context-menu></app-context-menu>
     <pin [sceneData]="editableJson" *ngIf="activeIndex != -1"></pin>
   </div>
 </div>

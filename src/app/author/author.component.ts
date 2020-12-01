@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthorService } from '../services/author.service';
+import { CommunicatorService } from '../services/communicator.service';
+import { ContextMenuService } from '../services/context-menu.service';
 
 @Component({
   selector: 'app-author',
@@ -21,7 +23,9 @@ export class AuthorComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private authorService: AuthorService
+    private authorService: AuthorService,
+    private communicator: CommunicatorService,
+    private contextMenuService: ContextMenuService
   ) { }
 
   ngOnInit() {
@@ -29,6 +33,12 @@ export class AuthorComponent implements OnInit {
       this.fileName = data.fileName;
       this.onRouteChange()
     }) 
+
+    this.communicator.getEmitter('EDITOR_SAVED').subscribe((data)=>{
+      var key= this.contextMenuService.getActiveKey;
+      this.editableJson[key] = data;
+      this.saveData();
+    })
   }
 
   onRouteChange(){
@@ -45,9 +55,19 @@ export class AuthorComponent implements OnInit {
     let newArr = this.copyArray(this.localJSON)
     this.editableJsonString = JSON.stringify(newArr[this.activeIndex], null, "\t");
     this.editableJson = newArr[this.activeIndex];
+    this.authorService.setEditableJson = this.editableJson;
   }
 
   saveData() {
+    try {
+      this.localJSON[this.activeIndex] = this.editableJson;
+      this.activeIndex = -1;
+    }
+    catch (e) {
+    };
+  }
+
+  saveRawData() {
     try {
       let obj = JSON.parse(this.editableJsonString);
       this.localJSON[this.activeIndex] = obj;

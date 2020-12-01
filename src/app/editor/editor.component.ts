@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
+import { ContextMenuService } from '../services/context-menu.service';
+import { AuthorService } from '../services/author.service';
+import { CommunicatorService } from '../services/communicator.service';
 
 declare var $ : any
 
@@ -26,7 +29,10 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output() contentChange = new EventEmitter<any>();
 
   constructor(
-    private router: Router
+    private router: Router,
+    private _contextMenuService: ContextMenuService,
+    private authorService: AuthorService,
+    private communicator: CommunicatorService
   ) {}
 
   ngOnInit() {
@@ -46,6 +52,10 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
       };
     }
 
+    var key = this._contextMenuService.getActiveKey;
+    var jsonObj = this.authorService.getEditableJson;
+    this.content = jsonObj[key]
+
   }
   
   ngOnDestroy(){
@@ -61,7 +71,8 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onSave(){
-    this.contentChange.emit(this.content)
+    this.authorService.setEditableJson = this.content
+    this.communicator.trigger('EDITOR_SAVED', this.content)
   }
 
   onCancel(){
