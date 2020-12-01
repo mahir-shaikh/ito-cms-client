@@ -32,6 +32,7 @@ import { ContextMenuService } from './services/context-menu.service';
 import { ContextMenuComponent } from './context-menu/context-menu.component';
 import { ContextMenuDirective } from './directives/context-menu.directive';
 import { CommunicatorService } from './services/communicator.service';
+import { StateManagementService } from './services/state-management.service';
 
 
 const pinComponents = [PinComponent, InfoUpdateComponent, CitationsComponent, ColumnMultiDragComponent, ColumnMultiSelectComponent, DragdropComponent, FeedbackGenericComponent, FixedHeaderTemplateComponent, InputTextCount, MatrixComponent, MultiselectAccordionComponent, SingleSelectRadioComponent]
@@ -57,7 +58,7 @@ const pinComponents = [PinComponent, InfoUpdateComponent, CitationsComponent, Co
     ContextMenuComponent,
     ContextMenuDirective
   ],
-  providers: [UploadService, AuthorService, ContextMenuService, CommunicatorService],
+  providers: [UploadService, AuthorService, ContextMenuService, CommunicatorService, StateManagementService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

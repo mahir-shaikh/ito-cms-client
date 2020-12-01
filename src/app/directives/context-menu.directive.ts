@@ -1,6 +1,7 @@
 import { Directive, Input } from '@angular/core';
 import { ContextMenuService } from '../services/context-menu.service';
 import { Subject } from 'rxjs';
+import { StateManagementService } from '../services/state-management.service';
 
 @Directive({
   selector: '[context-menu]',
@@ -9,10 +10,10 @@ import { Subject } from 'rxjs';
 export class ContextMenuDirective {
   @Input('context-menu') key = ''
 
-  constructor(private _contextMenuService:ContextMenuService){
+  constructor(private _contextMenuService:ContextMenuService, private stateManagement: StateManagementService){
   }
   rightClicked(event:MouseEvent){
-    this._contextMenuService.setActiveKey = this.key
+    this.stateManagement.setActiveKey = this.key
     this._contextMenuService.show.next({event:event, key: 'Edit '+ this.key});
 
     event.preventDefault(); // to prevent the browser contextmenu

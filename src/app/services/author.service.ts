@@ -7,15 +7,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthorService {
-  editableJson;
-  get getEditableJson(){
-    return this.editableJson;
-  }
-  set setEditableJson(val){
-    this.editableJson = val;
-  }
 
-  
   constructor(
     private http: HttpClient
   ) { }

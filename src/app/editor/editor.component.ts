@@ -1,9 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
-import { ContextMenuService } from '../services/context-menu.service';
-import { AuthorService } from '../services/author.service';
 import { CommunicatorService } from '../services/communicator.service';
+import { StateManagementService } from '../services/state-management.service';
 
 declare var $ : any
 
@@ -30,9 +29,8 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     private router: Router,
-    private _contextMenuService: ContextMenuService,
-    private authorService: AuthorService,
-    private communicator: CommunicatorService
+    private communicator: CommunicatorService,
+    private stateManagement: StateManagementService
   ) {}
 
   ngOnInit() {
@@ -52,8 +50,8 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
       };
     }
 
-    var key = this._contextMenuService.getActiveKey;
-    var jsonObj = this.authorService.getEditableJson;
+    var key = this.stateManagement.getActiveKey;
+    var jsonObj = this.stateManagement.getEditableJson;
     this.content = jsonObj[key]
 
   }
@@ -71,8 +69,9 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onSave(){
-    this.authorService.setEditableJson = this.content
+    this.stateManagement.setEditableJson = this.content
     this.communicator.trigger('EDITOR_SAVED', this.content)
+    this.onCancel();
   }
 
   onCancel(){

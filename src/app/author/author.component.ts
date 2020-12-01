@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthorService } from '../services/author.service';
 import { CommunicatorService } from '../services/communicator.service';
-import { ContextMenuService } from '../services/context-menu.service';
+import { StateManagementService } from '../services/state-management.service';
 
 @Component({
   selector: 'app-author',
@@ -25,7 +25,7 @@ export class AuthorComponent implements OnInit {
     private route: ActivatedRoute,
     private authorService: AuthorService,
     private communicator: CommunicatorService,
-    private contextMenuService: ContextMenuService
+    private stateManagement: StateManagementService
   ) { }
 
   ngOnInit() {
@@ -35,7 +35,7 @@ export class AuthorComponent implements OnInit {
     }) 
 
     this.communicator.getEmitter('EDITOR_SAVED').subscribe((data)=>{
-      var key= this.contextMenuService.getActiveKey;
+      var key= this.stateManagement.getActiveKey;
       this.editableJson[key] = data;
       this.saveData();
     })
@@ -55,13 +55,13 @@ export class AuthorComponent implements OnInit {
     let newArr = this.copyArray(this.localJSON)
     this.editableJsonString = JSON.stringify(newArr[this.activeIndex], null, "\t");
     this.editableJson = newArr[this.activeIndex];
-    this.authorService.setEditableJson = this.editableJson;
+    this.stateManagement.setEditableJson = this.editableJson;
   }
 
   saveData() {
     try {
       this.localJSON[this.activeIndex] = this.editableJson;
-      this.activeIndex = -1;
+      this.syncData()
     }
     catch (e) {
     };
