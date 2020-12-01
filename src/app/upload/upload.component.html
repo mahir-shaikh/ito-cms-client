@@ -1,0 +1,27 @@
+<div class="container">
+  <form class="upload-image-form" enctype="multipart/form-data">
+    <!-- <div class="row">
+      <div class="col-sm-6">
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="customFile" multiple (change)="onFileSelect($event)">
+          <label class="custom-file-label" for="customFile">{{fileInputLabel || 'Choose File'}}</label>
+        </div>
+      </div>
+
+      <div class="col-sm-6"> <button class="btn btn-primary" type="submit">Upload</button> </div>
+
+    </div> -->
+    <input type="file" class="upload-image-input" id="customFile" accept=".json,application/json" (change)="onFileSelect($event)">
+    <label class="upload-image-label" for="customFile">{{fileInputLabel || 'Drag your files here or click in this area.'}}</label>
+    <button class="upload-image-button btn btn-info" type="button" (click)="onSubmit()" [class.disabled]="files == undefined" [disabled]="files == undefined">Upload</button>
+  </form>
+</div>
+
+<div class="container">
+  <div class="card-columns">
+    <div class="card single-card" (click)="selectFile(file)" *ngFor="let file of existingFileData; let i=index">
+      {{file | json}}
+    </div>
+  </div>
+</div>
+
