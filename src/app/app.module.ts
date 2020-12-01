@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
-
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 import { AppComponent } from './app.component';
 import { UploadComponent } from './upload/upload.component';
@@ -27,6 +27,7 @@ import { InputTextCount } from './preview/input-text-count/itc.component';
 import { MatrixComponent } from './preview/matrix/matrix.component';
 import { MultiselectAccordionComponent } from './preview/multiselect-accordion/multiselect-accordion.component';
 import { SingleSelectRadioComponent } from './preview/single-select-radio/single-select-radio.component';
+import { EditorComponent } from './editor/editor.component';
 
 
 const pinComponents = [PinComponent, InfoUpdateComponent, CitationsComponent, ColumnMultiDragComponent, ColumnMultiSelectComponent, DragdropComponent, FeedbackGenericComponent, FixedHeaderTemplateComponent, InputTextCount, MatrixComponent, MultiselectAccordionComponent, SingleSelectRadioComponent]
@@ -38,14 +39,17 @@ const pinComponents = [PinComponent, InfoUpdateComponent, CitationsComponent, Co
     FormsModule,
     ReactiveFormsModule,
     AppRoutes,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot()
   ],
-  declarations: [		
+  declarations: [			
     AppComponent,
     UploadComponent,
     AuthorComponent,
     PreviewComponent,
-    pinComponents
+    pinComponents,
+      EditorComponent
    ],
   providers: [UploadService, AuthorService],
   bootstrap: [AppComponent]
