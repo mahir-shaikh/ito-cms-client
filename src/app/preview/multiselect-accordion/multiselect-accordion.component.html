@@ -181,7 +181,7 @@
         </button>
     </section> -->
 </div>
-<app-feedback-generic *ngIf="showFeedback" [scene]="data"></app-feedback-generic>
+<app-feedback-generic [scene]="data"></app-feedback-generic>
 <app-citations [scene]="data" *ngIf="!justShowSelection"></app-citations>
 
 <div bsModal #reviewModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-label="Review your selections"

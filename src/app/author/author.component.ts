@@ -20,6 +20,9 @@ export class AuthorComponent implements OnInit {
   editableJson: Object;
   invalidJson: boolean = false;
 
+  ToggleViewText="Show Raw Editor";
+  showRaw = false;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -56,6 +59,9 @@ export class AuthorComponent implements OnInit {
     this.editableJsonString = JSON.stringify(newArr[this.activeIndex], null, "\t");
     this.editableJson = newArr[this.activeIndex];
     this.stateManagement.setEditableJson = this.editableJson;
+
+    this.showRaw = false;
+    this.ToggleViewText = "Show Raw Editor"
   }
 
   saveData() {
@@ -112,4 +118,13 @@ export class AuthorComponent implements OnInit {
     return newArray;
   }
 
+  downloadJson(){
+    this.authorService.downloadFile(this.fileName)
+  }
+
+
+  toggleView(){
+    this.showRaw = !this.showRaw;
+    this.ToggleViewText = this.showRaw ? "Hide Raw Editor" : "Show Raw Editor";
+  }
 }

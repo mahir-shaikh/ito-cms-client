@@ -52,7 +52,11 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
 
     var key = this.stateManagement.getActiveKey;
     var jsonObj = this.stateManagement.getEditableJson;
-    this.content = jsonObj[key]
+    if(key && jsonObj){
+      this.content = jsonObj[key]
+    }else{
+      this.onCancel()
+    }
 
   }
   
@@ -69,7 +73,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onSave(){
-    this.stateManagement.setEditableJson = this.content
+    // this.stateManagement.setEditableJson = this.content
     this.communicator.trigger('EDITOR_SAVED', this.content)
     this.onCancel();
   }

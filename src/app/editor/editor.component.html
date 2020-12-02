@@ -1,6 +1,6 @@
 <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
   aria-labelledby="dialog-static-name">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h4 id="dialog-static-name" class="modal-title pull-left">Editor</h4>
@@ -11,15 +11,16 @@
       <div class="modal-body">
         <div (froalaInit)="initialize($event)" [froalaEditor]="options" [(froalaModel)]="content"></div>
       </div>
+      <div class="modal-footer">
+        <button (click)="onSave()" class="btn btn-success">
+          Save
+        </button>
+        
+        <button (click)="onCancel()" class="btn btn-danger">
+          Cancel
+        </button>
+      </div>
     </div>
   </div>
 </div>
 
-
-<a id="saveButton" (click)="onSave()" class=" custom-keypoint-menuhover-icon-color-edit">
-  Save
-</a>
-
-<a id="saveButton" (click)="onCancel()" class=" custom-keypoint-menuhover-icon-color-edit">
-  Cancel
-</a>

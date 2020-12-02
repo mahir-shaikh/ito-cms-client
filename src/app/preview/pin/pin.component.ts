@@ -27,7 +27,7 @@ export class PinComponent implements OnInit, OnDestroy, OnChanges {
             setTimeout(() => {
                 this.loading = false
                 this.cdr.detectChanges()
-            }, 1000);
+            });
         }
     }
 }

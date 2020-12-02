@@ -1,38 +1,59 @@
-<div class="author row">
-  <div class="col-2 list">
-    <ul class="">
-      <li class="" (click)="setActiveIndex(i)" *ngFor="let scene of localJSON; let i=index">
-        {{scene?.ID}}
+<div class="admin-wrapper">
+  <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" [routerLink]="'/upload'">
+      <span class="fa fa-chevron-left"></span> Back
+    </a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse"
+      data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <ul class="navbar-nav px-3 flex-row">
+      <li class="nav-item text-nowrap mx-3" *ngIf="activeIndex != -1">
+        <a class="nav-link" (click)="toggleView()">{{ToggleViewText}}</a>
+      </li>
+      <li class="nav-item text-nowrap mx-3">
+        <a class="nav-link" (click)="downloadJson()">Download Content</a>
       </li>
     </ul>
+  </nav>
 
-    <div class="card-contianer p-0 col-sm-12" *ngIf="changesDetected()">
-      <div class="sync-card card m-2">
-        <div class="card-body">
-          Changes detected that have not been synced yet.
-          <button class="btn btn-sm btn-success" (click)="syncData()">
-            Sync data
+  <div class="container-fluid">
+    <div class="row">
+      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+        <div class="sidebar-sticky pt-3">
+          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Scenes</span>
+          </h6>
+          <ul class="nav flex-column">
+            <li class="nav-item" *ngFor="let scene of localJSON; let i=index">
+              <a class="nav-link" (click)="setActiveIndex(i)" [class.active]="activeIndex == i">
+                {{scene?.ID}}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 p-md-4">
+        <div class="editor d-flex flex-column h-100" *ngIf="activeIndex != -1 && showRaw">
+          <div class="h-75 d-flex flex-column p-3">
+            <div class="flex-grow-1">
+              <textarea style="background-color:#999;color:white;width:100%;height:100%" [(ngModel)]='editableJsonString'></textarea>
+            </div>
+            <div class="alert alert-danger" *ngIf="invalidJson">
+              INVALID JSON. Please use Jsonlint.com to verify the Json.
+            </div>
+          </div>
+      
+          <button class="btn btn-sm btn-success mr-2" (click)="saveRawData()">
+            <span class="fa fa-check">Save</span>
           </button>
         </div>
-      </div>
+        <div class="preview" *ngIf="activeIndex != -1 && !showRaw">
+          <app-context-menu></app-context-menu>
+          <pin [sceneData]="editableJson"></pin>
+        </div>
+      </main>
     </div>
-  </div>
-  <div class="col-5 editor" *ngIf="activeIndex != -1">
-    <div class="">
-      <div class="">
-        <textarea style="background-color:#999;color:white;width:100%" [(ngModel)]='editableJsonString'></textarea>
-      </div>
-      <div class="" *ngIf="invalidJson">
-        INVALID JSON. Please use Jsonlint.com to verify the Json.
-      </div>
-    </div>
-
-    <button class="btn btn-sm btn-success mr-2" (click)="saveRawData()">
-      <span class="fa fa-check">Save</span>
-    </button>
-  </div>
-  <div class="col-5 preview">
-    <app-context-menu></app-context-menu>
-    <pin [sceneData]="editableJson" *ngIf="activeIndex != -1"></pin>
   </div>
 </div>

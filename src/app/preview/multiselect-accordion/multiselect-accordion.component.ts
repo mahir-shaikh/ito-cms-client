@@ -33,6 +33,14 @@ export class MultiselectAccordionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.scene = this.data
+    if (this.data.PageType && this.data.PageType === 'MultiSelectWithReview') {
+      this.showReviewBtn = true
+      this.data = this.getMultiSelectWithReviewData(this.scene);
+      this.statusText = '';
+    } else {
+      this.data = this.getMultiSelectAccordianData(this.scene);
+    }
     this.forceResize();
   }
 
@@ -181,5 +189,134 @@ export class MultiselectAccordionComponent implements OnInit {
     } else {
       this.assistiveText = `Press space or enter to collapse ${item.name}`;
     }
+  }
+
+  getMultiSelectAccordianData(data) {
+    let localObj = data;
+    let keyArr: any[] = Object.keys(localObj);
+    let collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: "base"
+    });
+    keyArr.sort(collator.compare);
+
+    const items = [];
+    const returnObj: any = {};
+
+    let i = 1;
+    returnObj.isFeedbackPresent = false;
+    keyArr.forEach((key: string) => {
+      if (key.indexOf('alt' + i) > -1 && key.length <= 5) {
+        let matchStr = localObj[key].indexOf('>');
+        let element = localObj[key].slice(0, matchStr + 1);
+        let extractStr = localObj[key].slice(matchStr + 1);
+
+        const obj = {
+          id: i,
+          prefix: (i + 9).toString(36).toUpperCase(),
+          name: localObj[key],
+          text: element + (i + 9).toString(36).toUpperCase() + '. ' + extractStr,
+          description: localObj[key + '_narrative'],
+          feedbackText: localObj[key + '_feedback'],
+          feedback1: (localObj[key + '_feedback1'] == undefined ? 0 : (localObj[key + '_feedback1'][0] == "+" ? 1 : -1)),
+          feedback1Reversed: localObj['reversed'] == undefined ? false : localObj['reversed'].indexOf('feedback1') != -1 ? true : false,
+          feedback1Text: localObj[key + '_feedback1'],
+          feedback2: (localObj[key + '_feedback2'] == undefined ? 0 : (localObj[key + '_feedback2'][0] == "+" ? 1 : -1)),
+          feedback2Reversed: localObj['reversed'] == undefined ? false : localObj['reversed'].indexOf('feedback2') != -1 ? true : false,
+          feedback2Text: localObj[key + '_feedback2'],
+          feedback3: (localObj[key + '_feedback3'] == undefined ? 0 : (localObj[key + '_feedback3'][0] == "+" ? 1 : -1)),
+          feedback3Reversed: localObj['reversed'] == undefined ? false : localObj['reversed'].indexOf('feedback3') != -1 ? true : false,
+          feedback3Text: localObj[key + '_feedback3'],
+          feedback4: (localObj[key + '_feedback4'] == undefined ? 0 : (localObj[key + '_feedback4'][0] == "+" ? 1 : -1)),
+          feedback4Reversed: localObj['reversed'] == undefined ? false : localObj['reversed'].indexOf('feedback4') != -1 ? true : false,
+          feedback4Text: localObj[key + '_feedback4'],
+          feedback5: (localObj[key + '_feedback5'] == undefined ? 0 : (localObj[key + '_feedback5'][0] == "+" ? 1 : -1)),
+          feedback5Reversed: localObj['reversed'] == undefined ? false : localObj['reversed'].indexOf('feedback5') != -1 ? true : false,
+          feedback5Text: localObj[key + '_feedback5']
+        };
+        items.push(obj);
+        i++;
+      }
+
+      if (key.indexOf('feedback') > -1) {
+        returnObj.isFeedbackPresent = true;
+      }
+
+      if (key.indexOf('alt') === -1) {
+        returnObj[key] = localObj[key];
+      }
+    });
+
+    returnObj.categories = [{ id: 1, heading: null, items: items }];
+    return returnObj;
+  }
+
+  getMultiSelectWithReviewData(data) {
+    let localObj = data;
+    let keyArr: any[] = Object.keys(localObj);
+    let collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: "base"
+    });
+    keyArr.sort(collator.compare);
+
+    let i = 1, j = 1;
+    const categoriesArray = [];
+    let categoryItems = [];
+    let categoryData: any = {};
+    const returnObj: any = {};
+    returnObj.isFeedbackPresent = false;
+
+    keyArr.forEach((key: any) => {
+      if (key.indexOf("col" + i) !== -1 && key.indexOf("col" + i + "alt") === -1) {
+        categoryData = {};
+        categoryData.id = i;
+        categoryData.heading = localObj[key];
+        categoryItems = [];
+        j = 1;
+        keyArr.forEach((key2: string) => {
+          if (key2.indexOf('col' + i + 'alt' + j) > -1) {
+            const obj = {
+              id: i + '' + j,
+              index: j,
+              prefix: (j + 9).toString(36).toUpperCase(),
+              name: localObj[key2],
+              description: localObj[key2 + '_narrative'],
+              feedbackText: localObj[key + '_feedback'],
+              feedback1: (localObj[key2 + '_feedback1'] == undefined ? 0 : (localObj[key2 + '_feedback1'][0] == "+" ? 1 : -1)),
+              feedback1Reversed: localObj['reversed'] == undefined ? false : localObj['reversed'].indexOf('feedback1') != -1 ? true : false,
+              feedback1Text: localObj[key2 + '_feedback1'],
+              feedback2: (localObj[key2 + '_feedback2'] == undefined ? 0 : (localObj[key2 + '_feedback2'][0] == "+" ? 1 : -1)),
+              feedback2Reversed: localObj['reversed'] == undefined ? false : localObj['reversed'].indexOf('feedback2') != -1 ? true : false,
+              feedback2Text: localObj[key2 + '_feedback2'],
+              feedback3: (localObj[key2 + '_feedback3'] == undefined ? 0 : (localObj[key2 + '_feedback3'][0] == "+" ? 1 : -1)),
+              feedback3Reversed: localObj['reversed'] == undefined ? false : localObj['reversed'].indexOf('feedback3') != -1 ? true : false,
+              feedback3Text: localObj[key2 + '_feedback3'],
+              feedback4: (localObj[key2 + '_feedback4'] == undefined ? 0 : (localObj[key2 + '_feedback4'][0] == "+" ? 1 : -1)),
+              feedback4Reversed: localObj['reversed'] == undefined ? false : localObj['reversed'].indexOf('feedback4') != -1 ? true : false,
+              feedback4Text: localObj[key2 + '_feedback4'],
+              feedback5: (localObj[key2 + '_feedback5'] == undefined ? 0 : (localObj[key2 + '_feedback5'][0] == "+" ? 1 : -1)),
+              feedback5Reversed: localObj['reversed'] == undefined ? false : localObj['reversed'].indexOf('feedback5') != -1 ? true : false,
+              feedback5Text: localObj[key2 + '_feedback5']
+            }
+            categoryItems.push(obj);
+            j++;
+          }
+        });
+        categoryData.items = categoryItems;
+        categoriesArray.push(categoryData);
+        i++;
+      }
+
+      if (key.indexOf('feedback') > -1) {
+        returnObj.isFeedbackPresent = true;
+      }
+
+      if (key.indexOf('col') === -1) {
+        returnObj[key] = localObj[key];
+      }
+    });
+    returnObj['categories'] = categoriesArray;
+    return returnObj;
   }
 }

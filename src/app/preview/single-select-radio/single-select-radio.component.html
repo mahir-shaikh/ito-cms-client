@@ -11,14 +11,14 @@
         <div class="email-info">
             <h1 class="email-from" [innerHtml]="data.header1" *ngIf="data.header1"></h1>
             <h2 class="email-direction" [innerHtml]="data.header2" *ngIf="data.header2"></h2>
-            <h2 class="email-direction" [innerHtml]="data.name"
+            <h2 class="email-direction" [context-menu]="'name'" [innerHtml]="data.name"
                 *ngIf="data.header2 == null || data.header2 == undefined"></h2>
         </div>
     </div>
     <div class="radio-container">
         <div class="radio-exercise-wrapper">
             <div>
-                <label class="radio-narrative" [innerHtml]="data.narrative"></label>
+                <label class="radio-narrative" [context-menu]="'narrative'" [innerHtml]="data.narrative"></label>
             </div>
             <p class="radio-question" [innerHtml]="data.osd"></p>
 
@@ -35,7 +35,7 @@
                     attr.aria-label="{{column.isChecked ? 'selected': 'not selected'}}, {{column.text}}, radio button"
                      [attr.aria-checked]="column.isChecked"
                     >
-                    <span id="radioText{{colIndex}}" class="radio-text" [innerHTML]="column.text"></span>
+                    <span id="radioText{{colIndex}}" class="radio-text" [innerHTML]="column.text" [context-menu]="'alt'+(colIndex+1)"></span>
                 </label>
             </div>
         </div>

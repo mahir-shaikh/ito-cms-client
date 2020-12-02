@@ -1,7 +1,6 @@
 <div class="fixed-header-template">
     <div class="header-title">
-        <h1 [context-menu]="'name'">
-            {{header.name}}
+        <h1 [context-menu]="'name'" [innerHtml]="header.name">
         </h1>
     </div>
     <div class="header-body">
