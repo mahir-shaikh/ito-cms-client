@@ -1,4 +1,7 @@
-<div class="container">
+<div class="container px-5 py-3">
+  <div class="alert alert-secondary text-center">
+    <h1>Upload File</h1>    
+  </div>
   <form class="upload-image-form" enctype="multipart/form-data">
     <!-- <div class="row">
       <div class="col-sm-6">
@@ -16,12 +19,40 @@
     <button class="upload-image-button btn btn-info" type="button" (click)="onSubmit()" [class.disabled]="files == undefined" [disabled]="files == undefined">Upload</button>
   </form>
 </div>
-
+<!-- 
 <div class="container">
   <div class="card-columns">
     <div class="card single-card" (click)="selectFile(file)" *ngFor="let file of existingFileData; let i=index">
       {{file | json}}
     </div>
   </div>
-</div>
+</div> -->
 
+
+
+<div class="container py-3">
+  <div class="alert alert-secondary text-center">
+      <h1>Existing Files</h1>    
+  </div>
+      
+  <table class="table table-bordered">
+      <thead class="bg-dark text-center">
+      <tr class="text-white">          
+          <th>File Name</th>
+          <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody class="text-center">
+          <tr *ngFor="let file of existingFileData">               
+              <td>{{file}}</td>
+              <td class="d-flex">
+                  <button  class="btn btn-sm btn-info mr-2" (click)="selectFile(file)">Edit</button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteFile(file)">Delete</button>
+              </td>
+          </tr>    
+      
+      </tbody>
+  </table>
+  
+  
+</div>

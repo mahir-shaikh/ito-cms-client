@@ -52,6 +52,7 @@ export class UploadComponent implements OnInit {
         console.info(response.message)
         this.files = undefined
         this.fileInputLabel = ''
+        this.fetchExistingFiles()
       }
     }).catch((err) => {
       if (err.message) {
@@ -64,5 +65,15 @@ export class UploadComponent implements OnInit {
 
   selectFile(file){
     this.router.navigate(['author', file])
+  }
+
+  deleteFile(file){
+    let confirmResponse = confirm('Are you sure you want to delete this file from the server?')
+    if(confirmResponse){
+      this.uploadService.deleteFile(file).then((data)=>{
+        this.fetchExistingFiles();
+      }).catch((err)=>{
+      })
+    }
   }
 }

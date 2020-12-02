@@ -20,4 +20,8 @@ export class UploadService {
     return this.http.get(environment.hostName +"/getAllJson").pipe(map((res) => res)).toPromise();
   }
 
+  deleteFile(fileName){
+    return this.http.delete(environment.hostName + '/deleteJson?fileName='+fileName).pipe(map((res) => res)).toPromise();
+  }
+
 }
