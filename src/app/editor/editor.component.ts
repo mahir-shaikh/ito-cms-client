@@ -6,6 +6,23 @@ import { StateManagementService } from '../services/state-management.service';
 
 declare var $ : any
 
+import "froala-editor/js/plugins/align.min.js";
+import "froala-editor/js/plugins/char_counter.min.js";
+import "froala-editor/js/plugins/code_beautifier.min.js";
+import "froala-editor/js/plugins/code_view.min.js";
+import "froala-editor/js/plugins/draggable.min.js";
+import "froala-editor/js/plugins/font_size.min.js";
+import "froala-editor/js/plugins/fullscreen.min.js";
+import "froala-editor/js/plugins/inline_class.min.js";
+import "froala-editor/js/plugins/line_breaker.min.js";
+import "froala-editor/js/plugins/lists.min.js";
+import "froala-editor/js/plugins/paragraph_style.min.js";
+import "froala-editor/js/plugins/paragraph_format.min.js"
+import "froala-editor/js/plugins/print.min.js";
+import "froala-editor/js/plugins/quote.min.js";
+import "froala-editor/js/plugins/table.min.js";
+import "froala-editor/js/plugins/word_paste.min.js";
+
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
@@ -37,7 +54,28 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
     if (!this.options) {
       this.options = {
         toolbarSticky: true,
-        toolbarButtons: ['bold', 'italic', 'underline','insertTable', 'fontSize', 'textColor', 'undo', 'redo', 'align'],
+        toolbarButtons: {
+            'moreText': {
+              'buttons': ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'textColor', 'backgroundColor', 'inlineClass', 'inlineStyle', 'clearFormatting']
+            },
+            'moreParagraph': {
+              'buttons': ['alignLeft', 'alignCenter', 'formatOLSimple', 'alignRight', 'alignJustify', 'formatOL', 'formatUL', 'paragraphFormat', 'paragraphStyle', 'lineHeight', 'outdent', 'indent', 'quote']
+            },
+            'moreRich': {
+              'buttons': [ 'insertTable', 'insertHR']
+            },
+            'moreMisc': {
+              'buttons': ['undo', 'redo', 'fullscreen', 'print', 'getPDF', 'spellChecker', 'selectAll', 'html', 'help'],
+              'align': 'right',
+              'buttonsVisible': 2
+            }
+        },
+        pluginsEnabled: [
+          "align", "charCounter", "codeBeautifier", "codeView", "draggable", "file",   "fontSize", 
+          "fullscreen", "inlineClass", "lineBreaker", "lists", 
+          "paragraphStyle", "quote", "table", "url", "wordPaste", 
+          "paragraphFormat"
+        ],
         events: {
           // 'initialized': (editor: any) => {
           //   if ($('#froala-toolbar').children().length > 1) {
