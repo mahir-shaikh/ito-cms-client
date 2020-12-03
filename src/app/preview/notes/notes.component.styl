@@ -1,0 +1,106 @@
+:host
+    position: absolute;
+    max-width: 500px;
+    top: 20px;
+    right: 20px;
+    z-index: 1;
+
+.note {
+    background-color: rgb(255, 240, 70);
+    position: relative;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5); 
+    margin-bottom: 1em;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.note_toolbar
+    background: #7f6c04;
+    border-radius: 8px 8px 0px 0px;
+    padding: 5px 10px;
+    color: #fff;
+    &.extented
+        min-width: 100px
+
+.close
+    top: 5px;
+    cursor:pointer;
+    color: white;
+    position: relative;
+
+.content {
+    padding: 5px;
+    outline: none;
+    height: 150px;
+    border-radius: 8px;
+    overflow-y: auto;
+}
+
+h2,p{
+  font-size:100%;
+  font-weight:normal;
+}
+ul,li{
+  list-style:none;
+}
+ul{
+  overflow:hidden;
+  padding:0;
+}
+ul li div{
+  text-decoration:none;
+  color:#000;
+  background:#ffc;
+  display:block;
+  min-width: 300px;
+  width:100%;
+  padding:1em;
+  box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+  transition:-webkit-transform .15s linear;
+}
+ul li{
+  margin:1em;
+}
+ul li h2{
+  font-weight:bold;
+}
+
+ul li div{
+  transform: rotate(-1deg);
+}
+ul li:nth-child(even) div{
+  transform:rotate(2deg);
+  position:relative;
+  top:5px;
+  background:#cfc;
+}
+ul li:nth-child(3n) div{
+  transform:rotate(-3deg);
+  position:relative;
+  top:-5px;
+  background:#ccf;
+}
+ul li div:hover,ul li div:focus{
+  box-shadow:10px 10px 7px rgba(0,0,0,.7);
+  -moz-box-shadow:10px 10px 7px rgba(0,0,0,.7);
+  -webkit-box-shadow: 10px 10px 7px rgba(0,0,0,.7);
+  -webkit-transform: scale(1.01);
+  -moz-transform: scale(1.01);
+  -o-transform: scale(1.01);
+  position:relative;
+  z-index:5;
+}
+ol{text-align:center;}
+ol li{display:inline;padding-right:1em;}
+ol li div{color:#fff;}
+
+
+
+.delete-icon
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 10px;
+    cursor: pointer;
+
+.add-icon
+    cursor: pointer;

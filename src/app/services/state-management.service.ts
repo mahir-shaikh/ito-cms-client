@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class StateManagementService {
-  activeKey
+  private activeKey
   get getActiveKey() {
     return this.activeKey;
   }
@@ -13,7 +13,7 @@ export class StateManagementService {
   }
 
 
-  editableJson;
+  private editableJson;
   get getEditableJson() {
     return this.editableJson;
   }

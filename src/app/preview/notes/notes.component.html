@@ -1,0 +1,25 @@
+<div class="note">
+	<div class="note_toolbar" [class.extented]="notesVisible">
+		<span class="" (click)="toggleNotes($event)">Notes
+			<span *ngIf="!notesVisible && notes.length > 0">({{notes.length}})</span>
+		</span>
+
+		<span class="add-icon float-right" (click)="addNote()" *ngIf="notesVisible">
+			<i class="fa fa-plus-circle"></i>
+		</span>
+	</div>
+	<ul class="flex-column" [class.d-flex]="notesVisible" [class.d-none]="!notesVisible">
+		<li *ngIf="notes.length == 0">
+			<div>
+				<p>No Notes added yet. Click on <i class="fa fa-plus-circle"></i> icon  to add a note</p>
+			</div>
+		</li>
+		<li *ngFor="let note of notes; let i=index">
+			<div>
+				<h2 contenteditable="true" [(contenteditableModel)]="note.title" (blur)="onFocusOut($event)"></h2>
+				<span class="delete-icon" (click)="removeNote(i)"><i class="fa fa-trash"></i></span>
+				<p contenteditable="true"[(contenteditableModel)]="note.text"  (blur)="onFocusOut($event)"></p>
+			</div>
+		</li>
+	</ul>
+</div>
