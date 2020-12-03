@@ -35,6 +35,7 @@ import { CommunicatorService } from './services/communicator.service';
 import { StateManagementService } from './services/state-management.service';
 import { NotesComponent } from './preview/notes/notes.component';
 import { ContentEditableDirective } from './directives/content-editable.directive';
+import { SanitizePipe } from './pipes/sanitize.pipe';
 
 
 const pinComponents = [PinComponent, InfoUpdateComponent, CitationsComponent, ColumnMultiDragComponent, ColumnMultiSelectComponent, DragdropComponent, FeedbackGenericComponent, FixedHeaderTemplateComponent, InputTextCount, MatrixComponent, MultiselectAccordionComponent, SingleSelectRadioComponent]
@@ -60,7 +61,8 @@ const pinComponents = [PinComponent, InfoUpdateComponent, CitationsComponent, Co
     ContextMenuComponent,
     ContextMenuDirective,
     ContentEditableDirective,
-    NotesComponent
+    NotesComponent,
+    SanitizePipe
   ],
   providers: [UploadService, AuthorService, ContextMenuService, CommunicatorService, StateManagementService],
   bootstrap: [AppComponent]

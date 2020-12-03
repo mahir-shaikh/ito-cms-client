@@ -53,6 +53,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     if (!this.options) {
       this.options = {
+        zIndex: 9990,
         toolbarSticky: true,
         toolbarButtons: {
             'moreText': {

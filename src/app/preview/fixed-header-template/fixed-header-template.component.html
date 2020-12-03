@@ -4,7 +4,7 @@
         </h1>
     </div>
     <div class="header-body">
-        <div class="header-content" [innerHtml]="header.narrative" [context-menu]="'narrative'" *ngIf="header.narrative"></div>
+        <div class="header-content" [innerHtml]="header.narrative | sanitize" [context-menu]="'narrative'" *ngIf="header.narrative"></div>
         <div class="header-data" *ngIf="header.osdPin">
             <app-multiselect-accordion [data]="header.osdPin" [justShowSelection]="true">
             </app-multiselect-accordion>
