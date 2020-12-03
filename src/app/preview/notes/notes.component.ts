@@ -10,7 +10,7 @@ import { CommunicatorService } from 'src/app/services/communicator.service';
   // directives: [ContentEditableDirective]
 })
 export class NotesComponent implements OnInit {
-  notesVisible = true;
+  notesVisible = false;
   @Input() notes: Array<any> = [];
 
   constructor(
