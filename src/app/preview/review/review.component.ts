@@ -8,7 +8,7 @@ import { Component, Input, OnInit, AfterViewInit, ElementRef } from '@angular/co
 })
 
 export class ReviewPageComponent implements OnInit, AfterViewInit {
-    @Input() data = '';
+    @Input() data;
     @Input() isSummary = false;
 
     localScene;
@@ -36,7 +36,7 @@ export class ReviewPageComponent implements OnInit, AfterViewInit {
 
                 case 'SingleSelect':
                     this.pinType = 4 // as per pin/dashboard component
-                    this.localChoices = this.getSingleSelectRadioData(this.data['ID'])['items'];
+                    this.localChoices = this.getSingleSelectRadioData(this.data)['items'];
                     this.hasIndividualFeedback = (/_feedback/g).test(Object.keys(this.localScene).join(';'));
                     this.hasGenericFeedback = this.localScene['fb_generic'] != null || this.localScene['fb_generic'] != undefined ;
                     this.hasBranching = this.localScene['branching'] === "0";
@@ -141,7 +141,35 @@ export class ReviewPageComponent implements OnInit, AfterViewInit {
         }catch(e){}
     }
 
-    getSingleSelectRadioData(data){
-
+    getSingleSelectRadioData(data) {
+        let localObj = data;
+        let keyArr: any[] = Object.keys(localObj);
+        let collator = new Intl.Collator(undefined, {
+            numeric: true,
+            sensitivity: "base"
+        });
+        keyArr.sort(collator.compare);
+        const items = [];
+        const returnObj: any = {};
+    
+        let i = 1;
+        keyArr.forEach((key: string) => {
+            let matchStr = localObj[key].indexOf('>');
+            if (key.indexOf('alt' + i) > -1) {
+                let element = localObj[key].slice(0, matchStr + 1);
+                let extractStr = localObj[key].slice(matchStr + 1);
+                const obj = {
+                    id: i,
+                    text: element + (i + 9).toString(36).toUpperCase() + '. ' + extractStr
+                };
+                items.push(obj);
+                i++;
+            } else {
+                returnObj[key] = localObj[key];
+            }
+        });
+    
+        returnObj.items = items;
+        return returnObj;
     }
 }

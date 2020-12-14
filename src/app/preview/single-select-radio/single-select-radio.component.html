@@ -20,7 +20,7 @@
             <div>
                 <label class="radio-narrative" [context-menu]="'narrative'" [innerHtml]="data.narrative"></label>
             </div>
-            <p class="radio-question" [innerHtml]="data.osd"></p>
+            <p class="radio-question" [context-menu]="'osd'" [innerHtml]="data.osd"></p>
 
             <!-- Puting this here for correct Tab Index -->
             <!-- <app-hint-modal [pinID]="pinID" [hideHint]="isDisabled"></app-hint-modal> -->
@@ -44,5 +44,5 @@
     
 </div>
 <div class="feedback-container animated fadeIn" role="alert" >
-    <!-- <reviewpage [pinID]="pinID"></reviewpage> -->
+    <reviewpage [data]="data"></reviewpage>
 </div>

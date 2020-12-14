@@ -18,7 +18,7 @@
                                 <input type="checkbox" id="checkbox{{i}}{{j}}" [checked]="item.isChecked ? true : false"
                                     (change)="checkboxClicked(i, j)"
                                     [disabled]="(isSelectionDisabled && !item.isChecked)" tabindex="-1" >
-                                <label id="checkboxText{{i}}{{j}}" for="checkbox{{i}}{{j}}" [attr.aria-label]="item.prefix +'. '+ item.name" tabindex="-1" role="none">
+                                <label id="checkboxText{{i}}{{j}}" for="checkbox{{i}}{{j}}" [attr.aria-label]="item.prefix +'. '+ item.name" tabindex="-1" role="none" [context-menu]="'alt'+(j+1)">
                                     <span style="padding-top: 0.5em;">
                                         <span
                                             [innerHTML]="item.text"></span>

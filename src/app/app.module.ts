@@ -36,9 +36,10 @@ import { StateManagementService } from './services/state-management.service';
 import { NotesComponent } from './preview/notes/notes.component';
 import { ContentEditableDirective } from './directives/content-editable.directive';
 import { SanitizePipe } from './pipes/sanitize.pipe';
+import { ReviewPageComponent } from './preview/review/review.component';
 
 
-const pinComponents = [PinComponent, InfoUpdateComponent, CitationsComponent, ColumnMultiDragComponent, ColumnMultiSelectComponent, DragdropComponent, FeedbackGenericComponent, FixedHeaderTemplateComponent, InputTextCount, MatrixComponent, MultiselectAccordionComponent, SingleSelectRadioComponent]
+const pinComponents = [PinComponent, InfoUpdateComponent, CitationsComponent, ColumnMultiDragComponent, ColumnMultiSelectComponent, DragdropComponent, FeedbackGenericComponent, FixedHeaderTemplateComponent, InputTextCount, MatrixComponent, MultiselectAccordionComponent, SingleSelectRadioComponent, ReviewPageComponent]
 
 @NgModule({
   imports: [

@@ -1,8 +1,7 @@
 <div class="review-choices animated fadeInUp" ismaScrollTo>
 	<div class="scenarioText">
 		<h1>
-			<isma-text-output key="name" [sceneId]="pinID" asInnerHtml="true" displayKeyIncaseUndefined="false">
-			</isma-text-output> feedback
+			<span>{{data?.name}}</span> feedback
 		</h1>
 	</div>
 	<!-- Single Select -->
@@ -15,18 +14,18 @@
 			<h2 *ngIf="!isSummary">In this event, you selected:</h2>
 			<h2 *ngIf="isSummary">You selected:</h2>
 			<!-- <span>{{ getChar(selectedValue)}}. </span><span [innerHTML]="localScene['alt' + selectedValue]"></span> -->
-			<span [innerHTML]="localChoices[selectedValue - 1].text"></span>
+			<span [innerHTML]="localChoices[selectedValue - 1]?.text"></span>
 		</div>
-		<div class="review-button-container" *ngIf="(!hasGenericFeedback || hasIndividualFeedback) && !hasBranching">
+		<div class="review-button-container" *ngIf="(!hasGenericFeedback || hasIndividualFeedback)">
 			<button [class.notShown]="showReview == false" class="btn review-button" (click)="toggleReview()">
 				<i class="ms-icons {{showReview ? 'ms-close' : 'ms-check-circle'}}" aria-hidden="true"></i>
-				<isma-text-output key="Review options" asInnerHtml="true" *ngIf="!showReview"></isma-text-output>
-				<isma-text-output key="Close review" asInnerHtml="true" *ngIf="showReview"></isma-text-output>
+				<span *ngIf="!showReview">Review options</span>
+				<span *ngIf="showReview">Close review</span>
 			</button>
 		</div>
 		<div class="scenarioText review-options-text" *ngIf="showReview">
 			<h3>
-				<isma-text-output key="Review options" asInnerHtml="true"></isma-text-output>
+				Review options
 			</h3>
 			<p class="review_note">
 				<i class="ms-icons" aria-label="Your Choice Indicator"></i>
@@ -57,7 +56,7 @@
 					<h3 *ngIf="!hasGenericFeedback">
 						Feedback
 					</h3>
-					<span [innerHTML]="localScene['alt' + answer + '_feedback']"
+					<span [context-menu]="'alt' + answer + '_feedback'" [innerHTML]="localScene['alt' + answer + '_feedback']"
 						*ngIf="localScene['alt' + answer + '_feedback']"></span>
 					<div *ngIf="hasCitations">
 						<app-citations [scene]="data"></app-citations>

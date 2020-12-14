@@ -9,7 +9,7 @@
             <app-multiselect-accordion [data]="header.osdPin" [justShowSelection]="true">
             </app-multiselect-accordion>
         </div>
-        <div class="header-question" [class.no-pb]="header.osdPin" [innerHtml]="header.osd" *ngIf="header.osd"></div>
+        <div class="header-question" [class.no-pb]="header.osdPin" [innerHtml]="header.osd" [context-menu]="'osd'"  *ngIf="header.osd"></div>
 
 
         <!-- Puting this here for correct Tab Index -->
