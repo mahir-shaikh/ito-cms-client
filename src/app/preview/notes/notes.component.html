@@ -1,6 +1,6 @@
 <div class="note">
 	<div class="note_toolbar" [class.extented]="notesVisible">
-		<span class="" (click)="toggleNotes($event)">Notes
+		<span class="note_title" (click)="toggleNotes($event)">Notes
 			<span *ngIf="!notesVisible && notes.length > 0">({{notes.length}})</span>
 		</span>
 
@@ -9,7 +9,7 @@
 		</span>
 	</div>
 	<ul class="flex-column" [class.d-flex]="notesVisible" [class.d-none]="!notesVisible">
-		<li *ngIf="notes.length == 0">
+		<li class="empty-note" (click)="addNote()" *ngIf="notes.length == 0">
 			<div>
 				<p>No Notes added yet. Click on <i class="fa fa-plus-circle"></i> icon  to add a note</p>
 			</div>
