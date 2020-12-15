@@ -37,6 +37,7 @@ import { NotesComponent } from './preview/notes/notes.component';
 import { ContentEditableDirective } from './directives/content-editable.directive';
 import { SanitizePipe } from './pipes/sanitize.pipe';
 import { ReviewPageComponent } from './preview/review/review.component';
+import { CustomPinComponent } from './preview/custom-pin/custom-pin.component';
 
 
 const pinComponents = [PinComponent, InfoUpdateComponent, CitationsComponent, ColumnMultiDragComponent, ColumnMultiSelectComponent, DragdropComponent, FeedbackGenericComponent, FixedHeaderTemplateComponent, InputTextCount, MatrixComponent, MultiselectAccordionComponent, SingleSelectRadioComponent, ReviewPageComponent]
@@ -63,7 +64,8 @@ const pinComponents = [PinComponent, InfoUpdateComponent, CitationsComponent, Co
     ContextMenuDirective,
     ContentEditableDirective,
     NotesComponent,
-    SanitizePipe
+    SanitizePipe,
+    CustomPinComponent
   ],
   providers: [UploadService, AuthorService, ContextMenuService, CommunicatorService, StateManagementService],
   bootstrap: [AppComponent]

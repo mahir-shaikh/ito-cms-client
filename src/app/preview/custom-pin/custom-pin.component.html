@@ -1,0 +1,10 @@
+<div class="custom-pin">
+  <ul>
+    <li class="row data-row" *ngFor="let key of keys">
+      <p class="col-3 data-label">
+        {{key}}
+      </p>
+      <div class="col-9 data-value" [context-menu]="key" [innerHTML]="data[key]"></div>
+    </li>
+  </ul>
+</div>

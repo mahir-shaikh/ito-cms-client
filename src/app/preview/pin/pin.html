@@ -27,6 +27,9 @@
                 <div class="pin-matrix" *ngSwitchCase="11">
                     <app-matrix [data]="sceneData"></app-matrix>
                 </div>
+                <div class="pin-default" *ngSwitchDefault>
+                    <app-custom-pin [data]="sceneData"></app-custom-pin>
+                </div>
             </ng-container>
         </div>
     </div>
