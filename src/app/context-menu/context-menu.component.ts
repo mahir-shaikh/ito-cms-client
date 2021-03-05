@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ContextMenuService } from '../services/context-menu.service';
 import { Router } from '@angular/router';
+import { CommunicatorService } from '../services/communicator.service';
 
 @Component({
   selector: 'app-context-menu',
@@ -15,7 +16,11 @@ export class ContextMenuComponent implements OnInit {
   isShown = false;
   private mouseLocation :{left:number,top:number} = {left:0,top:0};
 
-  constructor(private _contextMenuService:ContextMenuService, private router: Router){
+  constructor(
+    private _contextMenuService:ContextMenuService, 
+    private router: Router,
+    private communicator: CommunicatorService
+  ){
     _contextMenuService.show.subscribe(e => this.showMenu(e.event,e.key));
   }
   // the css for the container div
@@ -46,5 +51,12 @@ export class ContextMenuComponent implements OnInit {
 
   routeTo(){
     this.router.navigate([{ outlets: { editor: 'editor' } } ])
+  }
+
+  deleteKey(){
+    let confirmResponse = confirm("Are you sure you want to delete this key?")
+    if(confirmResponse){
+      this.communicator.trigger('DELETE_KEY')
+    }
   }
 }

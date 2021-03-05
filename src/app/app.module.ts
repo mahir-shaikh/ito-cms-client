@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 import { AppComponent } from './app.component';
@@ -45,11 +47,13 @@ const pinComponents = [PinComponent, InfoUpdateComponent, CitationsComponent, Co
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutes,
     ModalModule.forRoot(),
+    BsDropdownModule.forRoot(),
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot()
   ],

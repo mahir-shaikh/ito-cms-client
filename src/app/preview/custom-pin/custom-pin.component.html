@@ -7,4 +7,37 @@
       <div class="col-9 data-value" [context-menu]="key" [innerHTML]="data[key]"></div>
     </li>
   </ul>
+  <button class="btn btn-info btn-block" (click)="addNewKeyModal.show()">
+    +
+  </button>
+</div>
+
+<div class="modal fade" bsModal #addNewKeyModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-static-name" class="modal-title pull-left">Add New Key</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="addNewKeyModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul class="p-0 m-0">
+          <li class="row data-row">
+            <p class="col-3 data-label">Key:</p>
+            <div class="col-9 data-value" contenteditable="true" [(contenteditableModel)]="newKey"></div>
+          </li>
+          <li class="row data-row">
+            <p class="col-3 data-label">Value:</p>
+            <div class="col-9 data-value" contenteditable="true" [(contenteditableModel)]="newValue"></div>
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="addNew()" >Add</button>
+        <button type="button" class="btn btn-primary" (click)="addNewKeyModal.hide()" >Cancel</button>
+      </div>
+    </div>
+  </div>
 </div>

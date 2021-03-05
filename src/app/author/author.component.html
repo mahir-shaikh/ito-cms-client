@@ -9,7 +9,18 @@
     </button>
     <ul class="navbar-nav px-3 flex-row">
       <li class="nav-item text-nowrap mx-3" *ngIf="activeIndex != -1">
-        <a class="nav-link" (click)="toggleView()">{{ToggleViewText}}</a>
+        <div class="btn-group" dropdown container="body">
+          <button id="button-container" dropdownToggle type="button" class="btn btn-info dropdown-toggle"
+                  aria-controls="dropdown-container">
+            {{viewType}} <span class="caret"></span>
+          </button>
+          <div id="dropdown-container dropdown-menu-right" *dropdownMenu class="dropdown-menu"
+              role="menu" aria-labelledby="button-container">
+            <button class="dropdown-item" (click)="toggleView(1)">Component</button>
+            <button class="dropdown-item" (click)="toggleView(2)">Custom</button>
+            <button class="dropdown-item" (click)="toggleView(3)">Raw</button>
+          </div>
+        </div>
       </li>
       <li class="nav-item text-nowrap mx-3">
         <a class="nav-link" (click)="downloadJson()">Download Content</a>
@@ -35,7 +46,7 @@
       </nav>
 
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 p-md-4">
-        <div class="editor d-flex flex-column h-100" *ngIf="activeIndex != -1 && showRaw">
+        <div class="editor d-flex flex-column h-100" *ngIf="activeIndex != -1 && viewType == 'Raw'">
           <div class="h-75 d-flex flex-column p-3">
             <div class="flex-grow-1">
               <textarea style="background-color:#999;color:white;width:100%;height:100%" [(ngModel)]='editableJsonString'></textarea>
@@ -49,9 +60,15 @@
             <span class="fa fa-check">Save</span>
           </button>
         </div>
-        <div class="preview" *ngIf="activeIndex != -1 && !showRaw">
+        <div class="preview" *ngIf="activeIndex != -1 && viewType == 'Component'">
           <app-context-menu></app-context-menu>
           <pin [sceneData]="editableJson"></pin>
+        </div>
+
+        <div class="preview" *ngIf="activeIndex != -1 && viewType == 'Custom'">
+          <app-context-menu></app-context-menu>
+          <app-custom-pin [data]="editableJson"></app-custom-pin>
+          <app-notes [notes]="editableJson['notes']"></app-notes>
         </div>
       </main>
     </div>

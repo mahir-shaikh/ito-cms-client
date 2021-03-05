@@ -77,6 +77,10 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
           "paragraphStyle", "quote", "table", "url", "wordPaste", 
           "paragraphFormat"
         ],
+        colorsText: [
+          '#15E67F', '#E3DE8C', '#D8A076', '#D83762', '#76B6D8', 'REMOVE',
+          '#1C7A90', '#249CB8', '#4ABED9', '#FBD75B', '#FBE571', '#FFFFFF'
+        ],
         events: {
           // 'initialized': (editor: any) => {
           //   if ($('#froala-toolbar').children().length > 1) {

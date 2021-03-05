@@ -16,12 +16,14 @@ export class AuthorComponent implements OnInit {
   serverJSON;
   localJSON;
   activeIndex: number = -1;
-  editableJsonString:any;
+  editableJsonString: any;
   editableJson: Object;
   invalidJson: boolean = false;
 
-  ToggleViewText="Show Raw Editor";
+  ToggleViewText = "Show Raw Editor";
   showRaw = false;
+
+  viewType: ViewType;
 
   constructor(
     private router: Router,
@@ -32,21 +34,27 @@ export class AuthorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.routeObserver = this.route.params.subscribe(data=>{
+    this.routeObserver = this.route.params.subscribe(data => {
       this.fileName = data.fileName;
       this.onRouteChange()
     }) 
 
-    this.communicator.getEmitter('EDITOR_SAVED').subscribe((data)=>{
-      var key= this.stateManagement.getActiveKey;
+    this.communicator.getEmitter('EDITOR_SAVED').subscribe((data) => {
+      var key = this.stateManagement.getActiveKey;
       this.editableJson[key] = data;
+      this.saveData();
+    })
+
+    this.communicator.getEmitter('DELETE_KEY').subscribe((data) => {
+      var key = this.stateManagement.getActiveKey;
+      delete this.editableJson[key];
       this.saveData();
     })
   }
 
-  onRouteChange(){
-    if(this.fileName){
-      this.authorService.getSingleJsonFile(this.fileName).then((jsondata: any)=>{
+  onRouteChange() {
+    if (this.fileName) {
+      this.authorService.getSingleJsonFile(this.fileName).then((jsondata: any) => {
         this.serverJSON = jsondata.scenes;
         this.localJSON = this.copyArray(this.serverJSON)
       })
@@ -61,6 +69,7 @@ export class AuthorComponent implements OnInit {
     this.stateManagement.setEditableJson = this.editableJson;
 
     this.showRaw = false;
+    this.viewType = "Component"
     this.ToggleViewText = "Show Raw Editor"
   }
 
@@ -68,6 +77,13 @@ export class AuthorComponent implements OnInit {
     try {
       this.localJSON[this.activeIndex] = this.editableJson;
       this.syncData()
+
+      // Updated the json string as well
+      let newArr = this.copyArray(this.localJSON)
+      this.editableJsonString = JSON.stringify(newArr[this.activeIndex], null, "\t");
+
+      // Update reference of array to trigger ngOnChanges
+      this.editableJson = newArr[this.activeIndex]
     }
     catch (e) {
     };
@@ -118,13 +134,30 @@ export class AuthorComponent implements OnInit {
     return newArray;
   }
 
-  downloadJson(){
+  downloadJson() {
     this.authorService.downloadFile(this.fileName)
   }
 
 
-  toggleView(){
-    this.showRaw = !this.showRaw;
-    this.ToggleViewText = this.showRaw ? "Hide Raw Editor" : "Show Raw Editor";
+  toggleView(type) {
+    // this.showRaw = !this.showRaw;
+    // this.ToggleViewText = this.showRaw ? "Hide Raw Editor" : "Show Raw Editor";
+    switch (type) {
+      case 1:
+        this.viewType = "Component";
+        break;
+      case 2:
+        this.viewType = "Custom";
+        break;
+      case 3:
+        this.viewType = "Raw";
+        break;
+    }
+  }
+
+  addNew() {
+
   }
 }
+
+type ViewType = 'Component' | 'Custom' | 'Raw'
