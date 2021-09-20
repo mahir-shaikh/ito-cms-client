@@ -40,6 +40,7 @@ import { ContentEditableDirective } from './directives/content-editable.directiv
 import { SanitizePipe } from './pipes/sanitize.pipe';
 import { ReviewPageComponent } from './preview/review/review.component';
 import { CustomPinComponent } from './preview/custom-pin/custom-pin.component';
+import { NewSceneComponent } from './new-scene/new-scene.component';
 
 
 const pinComponents = [PinComponent, InfoUpdateComponent, CitationsComponent, ColumnMultiDragComponent, ColumnMultiSelectComponent, DragdropComponent, FeedbackGenericComponent, FixedHeaderTemplateComponent, InputTextCount, MatrixComponent, MultiselectAccordionComponent, SingleSelectRadioComponent, ReviewPageComponent]
@@ -57,7 +58,7 @@ const pinComponents = [PinComponent, InfoUpdateComponent, CitationsComponent, Co
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot()
   ],
-  declarations: [
+  declarations: [	
     AppComponent,
     UploadComponent,
     AuthorComponent,
@@ -69,8 +70,9 @@ const pinComponents = [PinComponent, InfoUpdateComponent, CitationsComponent, Co
     ContentEditableDirective,
     NotesComponent,
     SanitizePipe,
-    CustomPinComponent
-  ],
+    CustomPinComponent,
+      NewSceneComponent
+   ],
   providers: [UploadService, AuthorService, ContextMenuService, CommunicatorService, StateManagementService],
   bootstrap: [AppComponent]
 })

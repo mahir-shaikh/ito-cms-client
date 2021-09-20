@@ -37,7 +37,14 @@ export class AuthorComponent implements OnInit {
     this.routeObserver = this.route.params.subscribe(data => {
       this.fileName = data.fileName;
       this.onRouteChange()
-    }) 
+    })
+    
+    
+    this.communicator.getEmitter('ADD_NEW_SCENE').subscribe((data)=>{
+      this.localJSON.push(data)
+      this.setActiveIndex(this.localJSON.length - 1)
+      this.saveData()
+    })
 
     this.communicator.getEmitter('EDITOR_SAVED').subscribe((data) => {
       var key = this.stateManagement.getActiveKey;

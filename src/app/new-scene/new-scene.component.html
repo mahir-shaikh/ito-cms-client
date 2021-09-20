@@ -1,0 +1,40 @@
+<button class="btn btn-info btn-block" (click)="addNewSceneSetup()">
+  +
+</button>
+
+
+<div class="modal fade" bsModal #addNewSceneModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+  aria-labelledby="dialog-static-name">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-static-name" class="modal-title pull-left">Add New Scene</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="addNewSceneModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul class="p-0 m-0">
+          <li class="row data-row">
+            <p class="col-3 data-label">ID:</p>
+            <div class="col-9 data-value" contenteditable="true" [(contenteditableModel)]="newID"></div>
+          </li>
+
+          <li class="row data-row">
+            <p class="col-3 data-label">Create a copy of:</p>
+            <select class="col-9 data-value" [(ngModel)]="copyId">
+              <option value="" selected>Select</option>
+              <option [value]="option" *ngFor="let option of keys; let i=index">
+                {{option}}
+              </option>
+            </select>
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="addNew()">Add</button>
+        <button type="button" class="btn btn-primary" (click)="addNewSceneModal.hide()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
