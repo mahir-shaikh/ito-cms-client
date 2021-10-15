@@ -60,6 +60,9 @@ export class AuthorComponent implements OnInit {
 
     this.communicator.getEmitter('DELETE_SCENE').subscribe((data) => {
       var index = this.activeIndex;
+      if(data){
+        index = data;
+      }
       let newArr = this.copyArray(this.localJSON)
       newArr.splice(index, 1)
       this.localJSON = this.copyArray(newArr) // since array is passed as reference, it does not trigger ngOnChanges. Hence additional steps
@@ -173,6 +176,14 @@ export class AuthorComponent implements OnInit {
 
   addNew() {
 
+  }
+
+  deleteScene(index){
+    let confirmResponse = confirm("Are you sure you want to delete this scene? You cannot undo this decision.")
+
+    if(confirmResponse){
+      this.communicator.trigger('DELETE_SCENE', index)
+    }
   }
 }
 

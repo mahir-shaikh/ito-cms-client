@@ -9,7 +9,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 id="dialog-static-name" class="modal-title pull-left">Add New Scene</h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="addNewSceneModal.hide()">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="hidePopup()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -33,7 +33,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" (click)="addNew()">Add</button>
-        <button type="button" class="btn btn-primary" (click)="addNewSceneModal.hide()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="hidePopup()">Cancel</button>
       </div>
     </div>
   </div>

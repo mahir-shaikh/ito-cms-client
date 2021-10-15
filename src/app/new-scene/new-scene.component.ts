@@ -49,6 +49,12 @@ export class NewSceneComponent implements OnInit {
     this.addNewSceneModal.show()
   }
 
+  hidePopup(){
+    this.newID = '';
+    this.copyId = '';
+    this.addNewSceneModal.hide();
+  }
+
   addNew(){
     if(this.keys.includes(this.newID) || this.keys.indexOf(this.newID) != -1){
       //error key already exists
