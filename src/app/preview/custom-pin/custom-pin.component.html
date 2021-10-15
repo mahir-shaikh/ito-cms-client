@@ -7,9 +7,15 @@
       <div class="col-9 data-value" [context-menu]="key" [innerHTML]="data[key]"></div>
     </li>
   </ul>
-  <button class="btn btn-info btn-block" (click)="addNewKeyModal.show()">
-    +
-  </button>
+  <div class="button container row">
+    <button class="btn btn-info btn-block" (click)="addNewKeyModal.show()">
+      +
+    </button>
+
+    <button class="btn btn-danger btn-block" (click)="deleteKey()">
+      <i class="fa fa-trash"></i>
+    </button>
+  </div>
 </div>
 
 <div class="modal fade" bsModal #addNewKeyModal="bs-modal" [config]="{backdrop: 'static'}"

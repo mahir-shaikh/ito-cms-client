@@ -10,6 +10,7 @@ export class StateManagementService {
   }
   set setActiveKey(val) {
     this.activeKey = val
+    localStorage.setItem('Active Key', JSON.stringify(this.activeKey))
   }
 
 
@@ -19,6 +20,7 @@ export class StateManagementService {
   }
   set setEditableJson(val) {
     this.editableJson = val;
+    localStorage.setItem('Editable Json', JSON.stringify(this.editableJson))
   }
 
   constructor() { }

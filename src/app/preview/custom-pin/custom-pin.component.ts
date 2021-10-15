@@ -46,7 +46,14 @@ export class CustomPinComponent implements OnInit {
       this.newKey = ''
       this.newValue = ''
     }
+  }
 
+  deleteKey(){
+    let confirmResponse = confirm("Are you sure you want to delete this scene? You cannot undo this decision.")
+
+    if(confirmResponse){
+      this.communicator.trigger('DELETE_SCENE')
+    }
   }
 
 }

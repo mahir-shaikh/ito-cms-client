@@ -57,6 +57,15 @@ export class AuthorComponent implements OnInit {
       delete this.editableJson[key];
       this.saveData();
     })
+
+    this.communicator.getEmitter('DELETE_SCENE').subscribe((data) => {
+      var index = this.activeIndex;
+      let newArr = this.copyArray(this.localJSON)
+      newArr.splice(index, 1)
+      this.localJSON = this.copyArray(newArr) // since array is passed as reference, it does not trigger ngOnChanges. Hence additional steps
+      this.syncData()
+      this.activeIndex = -1;
+    })
   }
 
   onRouteChange() {
