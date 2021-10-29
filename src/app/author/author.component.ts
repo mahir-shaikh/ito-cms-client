@@ -42,7 +42,20 @@ export class AuthorComponent implements OnInit {
     
     this.communicator.getEmitter('ADD_NEW_SCENE').subscribe((data)=>{
       this.localJSON.push(data)
-      this.setActiveIndex(this.localJSON.length - 1)
+      let activeID = data.ID;
+      // sort
+      this.localJSON.sort((a,b) => {
+        if(a.ID != undefined && b.ID != undefined){
+          return a.ID.localeCompare(b.ID)
+        }else{
+          return 1;
+        }
+      }
+      
+       )
+      //set back active index
+      let activeIndex = this.localJSON.findIndex(x => x.ID == activeID );
+      this.setActiveIndex(activeIndex)
       this.saveData()
     })
 
